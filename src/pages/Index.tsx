@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Header from "@/components/Header";
 import { Button } from "@/components/ui/button";
+import RequestCardDialog from "@/components/RequestCardDialog";
 import creditCard from "@/assets/credit-card.png";
 import revolutVideo from "@/assets/revolut-video.mp4";
 import revolutCards from "@/assets/revolut-cards.png";
@@ -20,9 +21,12 @@ type CardColor = keyof typeof metalCards;
 
 const Index = () => {
   const [selectedCard, setSelectedCard] = useState<CardColor>("Black");
+  const [dialogOpen, setDialogOpen] = useState(false);
+
   return (
     <div className="min-h-screen bg-background max-w-md mx-auto relative">
-      <Header />
+      <Header onRequestCard={() => setDialogOpen(true)} />
+      <RequestCardDialog open={dialogOpen} onOpenChange={setDialogOpen} />
       <section className="px-5 pt-10 pb-0 relative z-10">
         <h1 className="text-4xl font-bold leading-tight tracking-tight text-foreground" style={{ fontFamily: "'Aeonik Pro', 'Inter', sans-serif" }}>
           Limite de crédito até <span className="text-accent">5.000 euros</span>
@@ -35,7 +39,7 @@ const Index = () => {
         </div>
       </section>
       <section className="bg-black -mt-28 pt-28 pb-16 px-5 rounded-t-3xl flex flex-col items-center">
-        <Button className="bg-white text-black hover:bg-white/90 rounded-full font-semibold px-10 py-7 text-lg pulse">
+        <Button onClick={() => setDialogOpen(true)} className="bg-white text-black hover:bg-white/90 rounded-full font-semibold px-10 py-7 text-lg pulse">
           Solicitar o meu cartão
         </Button>
         <div className="relative mt-10 w-full">
@@ -63,7 +67,7 @@ const Index = () => {
           <img src={revolutCards} alt="Cartões Revolut" className="w-full rounded-2xl" />
         </div>
         <div className="mt-8">
-          <Button className="rounded-full font-semibold px-8 py-6 text-base">
+          <Button onClick={() => setDialogOpen(true)} className="rounded-full font-semibold px-8 py-6 text-base">
             Solicitar o meu cartão
           </Button>
         </div>
@@ -96,7 +100,7 @@ const Index = () => {
           Revolucione a sua vida financeira
         </h2>
         <div className="mt-6">
-          <Button className="bg-white text-black hover:bg-white/90 rounded-full font-semibold px-10 py-7 text-lg pulse">
+          <Button onClick={() => setDialogOpen(true)} className="bg-white text-black hover:bg-white/90 rounded-full font-semibold px-10 py-7 text-lg pulse">
             Solicitar o meu cartão
           </Button>
         </div>

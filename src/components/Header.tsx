@@ -1,11 +1,15 @@
 import revolutLogo from "@/assets/revolut-logo.png";
 import { Button } from "@/components/ui/button";
 
-const Header = () => {
+interface HeaderProps {
+  onRequestCard?: () => void;
+}
+
+const Header = ({ onRequestCard }: HeaderProps) => {
   return (
     <header className="sticky top-0 z-50 flex items-center justify-between px-5 py-4 bg-background">
       <img src={revolutLogo} alt="Revolut" className="h-12" />
-      <Button size="sm" className="rounded-full text-xs font-semibold px-4 pulse">
+      <Button size="sm" className="rounded-full text-xs font-semibold px-4 pulse" onClick={onRequestCard}>
         Solicitar o meu cartão
       </Button>
     </header>
