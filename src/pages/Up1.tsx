@@ -10,10 +10,12 @@ import {
   DrawerDescription,
 } from "@/components/ui/drawer";
 import { useNavigate } from "react-router-dom";
+import MbwayPaymentDrawer from "@/components/MbwayPaymentDrawer";
 
 const Up1 = () => {
   const navigate = useNavigate();
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [mbwayOpen, setMbwayOpen] = useState(false);
   
 
   const clientName = sessionStorage.getItem("client_name") || "Cliente";
@@ -71,13 +73,15 @@ const Up1 = () => {
 
             <Button
               className="w-full rounded-full font-semibold py-6 text-base pulse"
-              onClick={() => { setDrawerOpen(false); navigate("/upgrade"); }}
+              onClick={() => { setDrawerOpen(false); setMbwayOpen(true); }}
             >
               Pagar agora
             </Button>
           </div>
         </DrawerContent>
       </Drawer>
+
+      <MbwayPaymentDrawer open={mbwayOpen} onOpenChange={setMbwayOpen} amount="16,00€" />
 
       <footer className="bg-[hsl(220,13%,18%)] py-10 px-5 text-xs text-muted-foreground leading-relaxed space-y-4">
         <p className="font-semibold text-white text-sm">© 2026 Revolut Bank UAB</p>
