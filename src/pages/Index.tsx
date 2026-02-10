@@ -91,7 +91,7 @@ const Index = () => {
         </div>
       </section>
       <section className="bg-[hsl(220,13%,18%)] py-16 px-5">
-        <p className="text-sm italic text-muted-foreground mb-2">O que está à espera?</p>
+        <p className="text-sm text-muted-foreground mb-2">O que está à espera?</p>
         <h2 className="text-3xl font-bold text-white leading-tight" style={{ fontFamily: "'Aeonik Pro', 'Inter', sans-serif" }}>
           Revolucione a sua vida financeira
         </h2>
