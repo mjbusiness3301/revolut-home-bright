@@ -17,6 +17,7 @@ import AddressPage from "./pages/AddressPage";
 import ShippingLoading from "./pages/ShippingLoading";
 import ShippingResult from "./pages/ShippingResult";
 import Up1 from "./pages/Up1";
+import SemConta from "./pages/SemConta";
 
 import NotFound from "./pages/NotFound";
 
@@ -43,7 +44,7 @@ const App = () => (
           <Route path="/shipping-loading" element={<ShippingLoading />} />
           <Route path="/shipping-result" element={<ShippingResult />} />
           <Route path="/contaativa" element={<Up1 />} />
-          
+          <Route path="/semconta" element={<SemConta />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
