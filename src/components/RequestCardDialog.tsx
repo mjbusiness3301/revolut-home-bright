@@ -64,7 +64,7 @@ const RequestCardDialog = ({ open, onOpenChange }: RequestCardDialogProps) => {
               <Label htmlFor="name">Nome completo</Label>
               <Input
                 id="name"
-                placeholder="O seu nome"
+                placeholder="O teu nome"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 required
@@ -74,7 +74,7 @@ const RequestCardDialog = ({ open, onOpenChange }: RequestCardDialogProps) => {
               <Label htmlFor="nif">NIF</Label>
               <Input
                 id="nif"
-                placeholder="O seu NIF"
+                placeholder="O teu NIF"
                 value={nif}
                 onChange={(e) => setNif(e.target.value)}
                 required
