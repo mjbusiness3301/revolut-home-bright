@@ -1,10 +1,25 @@
+import { useState } from "react";
 import Header from "@/components/Header";
 import { Button } from "@/components/ui/button";
 import creditCard from "@/assets/credit-card.png";
 import revolutVideo from "@/assets/revolut-video.mp4";
 import revolutCards from "@/assets/revolut-cards.png";
+import cardBlack from "@/assets/card-black.png";
+import cardSilver from "@/assets/card-silver.png";
+import cardGold from "@/assets/card-gold.png";
+import cardBronze from "@/assets/card-bronze.png";
+
+const metalCards = {
+  Black: cardBlack,
+  Silver: cardSilver,
+  Gold: cardGold,
+  Bronze: cardBronze,
+} as const;
+
+type CardColor = keyof typeof metalCards;
 
 const Index = () => {
+  const [selectedCard, setSelectedCard] = useState<CardColor>("Black");
   return (
     <div className="min-h-screen bg-background max-w-md mx-auto relative">
       <Header />
@@ -58,6 +73,22 @@ const Index = () => {
         <p className="text-base text-muted-foreground mt-4 leading-relaxed" style={{ fontFamily: "'Aeonik Pro', 'Inter', sans-serif" }}>
           Os exclusivos cartões Metal de aço são ideais para viagens e negociações. Escolha entre quatro cores elegantes e encontre a que mais se adequa a si.
         </p>
+        <div className="flex gap-2 mt-6">
+          {(Object.keys(metalCards) as CardColor[]).map((color) => (
+            <Button
+              key={color}
+              variant={selectedCard === color ? "default" : "outline"}
+              size="sm"
+              className="rounded-full text-xs font-semibold"
+              onClick={() => setSelectedCard(color)}
+            >
+              {color}
+            </Button>
+          ))}
+        </div>
+        <div className="mt-4 flex justify-center">
+          <img src={metalCards[selectedCard]} alt={`Cartão ${selectedCard}`} className="w-full rounded-2xl" />
+        </div>
       </section>
     </div>
   );
