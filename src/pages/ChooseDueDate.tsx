@@ -56,7 +56,7 @@ const ChooseDueDate = () => {
       <div className="pb-10 pt-6">
         <Button
           disabled={!selected}
-          onClick={() => {/* TODO: next step */}}
+          onClick={() => navigate("/address")}
           className="w-full rounded-full font-semibold py-7 text-base pulse"
         >
           Confirmar data
