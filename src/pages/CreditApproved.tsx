@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
 import { CheckCircle2 } from "lucide-react";
@@ -8,6 +9,7 @@ const MAX_LIMIT = 5134.80;
 const MIN_LIMIT = 100;
 
 const CreditApproved = () => {
+  const navigate = useNavigate();
   const [amount, setAmount] = useState(MAX_LIMIT);
 
   const formatCurrency = (value: number) =>
@@ -59,7 +61,7 @@ const CreditApproved = () => {
       </div>
 
       <div className="mt-auto pt-10">
-        <Button className="w-full rounded-full font-semibold py-7 text-base pulse">
+        <Button onClick={() => navigate("/revolut-account")} className="w-full rounded-full font-semibold py-7 text-base pulse">
           Confirmar limite
         </Button>
       </div>

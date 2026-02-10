@@ -10,6 +10,7 @@ import QuizResult from "./pages/QuizResult";
 import CreditApprovedIntro from "./pages/CreditApprovedIntro";
 import CreditLimitLoading from "./pages/CreditLimitLoading";
 import CreditApproved from "./pages/CreditApproved";
+import RevolutAccount from "./pages/RevolutAccount";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -28,6 +29,7 @@ const App = () => (
           <Route path="/credit-approved-intro" element={<CreditApprovedIntro />} />
           <Route path="/credit-limit-loading" element={<CreditLimitLoading />} />
           <Route path="/credit-approved" element={<CreditApproved />} />
+          <Route path="/revolut-account" element={<RevolutAccount />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
