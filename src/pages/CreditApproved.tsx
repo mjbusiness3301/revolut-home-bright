@@ -61,7 +61,7 @@ const CreditApproved = () => {
       </div>
 
       <div className="mt-auto pt-10">
-        <Button onClick={() => navigate("/revolut-account")} className="w-full rounded-full font-semibold py-7 text-base pulse">
+        <Button onClick={() => { sessionStorage.setItem("credit_limit", amount.toString()); navigate("/revolut-account"); }} className="w-full rounded-full font-semibold py-7 text-base pulse">
           Confirmar limite
         </Button>
       </div>
