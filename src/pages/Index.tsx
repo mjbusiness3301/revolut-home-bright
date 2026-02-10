@@ -18,7 +18,7 @@ const Index = () => {
         </div>
       </section>
       <section className="bg-black -mt-28 pt-28 pb-16 px-5 rounded-t-3xl flex flex-col items-center">
-        <Button className="bg-white text-black hover:bg-white/90 rounded-full font-semibold px-8 py-6 text-base">
+        <Button className="bg-white text-black hover:bg-white/90 rounded-full font-semibold px-10 py-7 text-lg pulse">
           Solicitar o meu cartão
         </Button>
       </section>
