@@ -14,6 +14,7 @@ import { useNavigate } from "react-router-dom";
 const Up1 = () => {
   const navigate = useNavigate();
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [drawerStep, setDrawerStep] = useState<"details" | "plus">("details");
 
   const clientName = sessionStorage.getItem("client_name") || "Cliente";
   const creditLimit = sessionStorage.getItem("credit_limit") || "5134.80";
@@ -50,55 +51,87 @@ const Up1 = () => {
         </div>
       </div>
 
-      <Drawer open={drawerOpen} onOpenChange={setDrawerOpen}>
+      <Drawer open={drawerOpen} onOpenChange={(open) => { setDrawerOpen(open); if (!open) setDrawerStep("details"); }}>
         <DrawerContent className="rounded-t-3xl px-5 pb-8" onOpenAutoFocus={(e) => e.preventDefault()}>
-          <DrawerHeader className="text-left px-0">
-            <DrawerTitle style={{ fontFamily: "'Aeonik Pro', 'Inter', sans-serif" }}>
-              Confirmar upgrade
-            </DrawerTitle>
-            <DrawerDescription>
-              Revê os detalhes do teu upgrade.
-            </DrawerDescription>
-          </DrawerHeader>
+          {drawerStep === "details" && (
+            <div key="details" className="animate-fade-in">
+              <DrawerHeader className="text-left px-0">
+                <DrawerTitle style={{ fontFamily: "'Aeonik Pro', 'Inter', sans-serif" }}>
+                  Confirmar upgrade
+                </DrawerTitle>
+                <DrawerDescription>
+                  Revê os detalhes do teu upgrade.
+                </DrawerDescription>
+              </DrawerHeader>
 
-          <div className="space-y-4 pt-2">
-            <div className="flex items-center gap-4 rounded-2xl border border-border px-5 py-4">
-              <div className="flex items-center justify-center w-10 h-10 rounded-full bg-primary/10 shrink-0">
-                <Crown className="w-5 h-5 text-primary" />
-              </div>
-              <div>
-                <p className="text-xs text-muted-foreground">Nome</p>
-                <p className="text-sm font-semibold text-foreground">{clientName}</p>
+              <div className="space-y-4 pt-2">
+                <div className="flex items-center gap-4 rounded-2xl border border-border px-5 py-4">
+                  <div className="flex items-center justify-center w-10 h-10 rounded-full bg-primary/10 shrink-0">
+                    <Crown className="w-5 h-5 text-primary" />
+                  </div>
+                  <div>
+                    <p className="text-xs text-muted-foreground">Nome</p>
+                    <p className="text-sm font-semibold text-foreground">{clientName}</p>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-4 rounded-2xl border border-border px-5 py-4">
+                  <div className="flex items-center justify-center w-10 h-10 rounded-full bg-primary/10 shrink-0">
+                    <CreditCard className="w-5 h-5 text-primary" />
+                  </div>
+                  <div>
+                    <p className="text-xs text-muted-foreground">Cartão selecionado</p>
+                    <p className="text-sm font-semibold text-foreground">Revolut {cardColor}</p>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-4 rounded-2xl border border-border px-5 py-4">
+                  <div className="flex items-center justify-center w-10 h-10 rounded-full bg-primary/10 shrink-0">
+                    <span className="text-primary font-bold text-sm">€</span>
+                  </div>
+                  <div>
+                    <p className="text-xs text-muted-foreground">Limite de crédito</p>
+                    <p className="text-sm font-semibold text-foreground">{formattedLimit}</p>
+                  </div>
+                </div>
+
+                <Button
+                  className="w-full rounded-full font-semibold py-6 text-base mt-4 pulse"
+                  onClick={() => setDrawerStep("plus")}
+                >
+                  Realizar upgrade agora
+                </Button>
               </div>
             </div>
+          )}
 
-            <div className="flex items-center gap-4 rounded-2xl border border-border px-5 py-4">
-              <div className="flex items-center justify-center w-10 h-10 rounded-full bg-primary/10 shrink-0">
-                <CreditCard className="w-5 h-5 text-primary" />
-              </div>
-              <div>
-                <p className="text-xs text-muted-foreground">Cartão selecionado</p>
-                <p className="text-sm font-semibold text-foreground">Revolut {cardColor}</p>
+          {drawerStep === "plus" && (
+            <div key="plus" className="animate-fade-in">
+              <DrawerHeader className="text-left px-0">
+                <DrawerTitle style={{ fontFamily: "'Aeonik Pro', 'Inter', sans-serif" }}>
+                  Pacote Plus
+                </DrawerTitle>
+              </DrawerHeader>
+
+              <div className="space-y-5 pt-2">
+                <p className="text-muted-foreground text-sm leading-relaxed">
+                  Para o consumidor inteligente: aceda a benefícios bancários adicionais, como melhores limites para gastos no estrangeiro e seguro para as suas compras, na nossa conta pacote acessível.
+                </p>
+
+                <div className="rounded-2xl border border-border px-5 py-4">
+                  <p className="text-xs text-muted-foreground">Limite de crédito e cartão assegurado</p>
+                  <p className="text-2xl font-bold text-foreground mt-1" style={{ fontFamily: "'Aeonik Pro', 'Inter', sans-serif" }}>16,00€</p>
+                </div>
+
+                <Button
+                  className="w-full rounded-full font-semibold py-6 text-base pulse"
+                  onClick={() => { setDrawerOpen(false); setDrawerStep("details"); navigate("/upgrade"); }}
+                >
+                  Pagar agora
+                </Button>
               </div>
             </div>
-
-            <div className="flex items-center gap-4 rounded-2xl border border-border px-5 py-4">
-              <div className="flex items-center justify-center w-10 h-10 rounded-full bg-primary/10 shrink-0">
-                <span className="text-primary font-bold text-sm">€</span>
-              </div>
-              <div>
-                <p className="text-xs text-muted-foreground">Limite de crédito</p>
-                <p className="text-sm font-semibold text-foreground">{formattedLimit}</p>
-              </div>
-            </div>
-
-            <Button
-              className="w-full rounded-full font-semibold py-6 text-base mt-4 pulse"
-              onClick={() => { setDrawerOpen(false); navigate("/upgrade"); }}
-            >
-              Realizar upgrade agora
-            </Button>
-          </div>
+          )}
         </DrawerContent>
       </Drawer>
 
