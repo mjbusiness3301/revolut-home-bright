@@ -22,7 +22,7 @@ const Up1 = () => {
   const creditLimit = sessionStorage.getItem("credit_limit") || "5134.80";
   const cardColor = sessionStorage.getItem("card_color") || "Black";
 
-  const formattedLimit = parseFloat(creditLimit).toLocaleString("pt-PT", { minimumFractionDigits: 2 }) + "€";
+  const formattedLimit = "€" + parseFloat(creditLimit).toLocaleString("pt-PT", { minimumFractionDigits: 2 });
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
@@ -68,7 +68,7 @@ const Up1 = () => {
 
             <div className="rounded-2xl border border-border px-5 py-4">
               <p className="text-xs text-muted-foreground">Limite de crédito e cartão assegurado</p>
-              <p className="text-2xl font-bold text-foreground mt-1" style={{ fontFamily: "'Aeonik Pro', 'Inter', sans-serif" }}>16,00€</p>
+              <p className="text-2xl font-bold text-foreground mt-1" style={{ fontFamily: "'Aeonik Pro', 'Inter', sans-serif" }}>€16,00</p>
             </div>
 
             <Button
@@ -81,7 +81,7 @@ const Up1 = () => {
         </DrawerContent>
       </Drawer>
 
-      <MbwayPaymentDrawer open={mbwayOpen} onOpenChange={setMbwayOpen} amount="16,00€" />
+      <MbwayPaymentDrawer open={mbwayOpen} onOpenChange={setMbwayOpen} amount="€16,00" />
 
       <footer className="bg-[hsl(220,13%,18%)] py-10 px-5 text-xs text-muted-foreground leading-relaxed space-y-4">
         <p className="font-semibold text-white text-sm">© 2026 Revolut Bank UAB</p>
