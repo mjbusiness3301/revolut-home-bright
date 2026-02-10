@@ -9,7 +9,7 @@ const Up1 = () => {
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
-      <div className="flex-1 flex flex-col items-center px-6 py-10 mb-20">
+      <div className="flex-1 flex flex-col items-center px-6 py-10 mb-48">
         <img src={revolutLogo} alt="Revolut" className="h-12 mb-10" />
         
         <div className="max-w-sm text-center space-y-4">
