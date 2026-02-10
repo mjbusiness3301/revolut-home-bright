@@ -12,6 +12,7 @@ import CreditLimitLoading from "./pages/CreditLimitLoading";
 import CreditApproved from "./pages/CreditApproved";
 import RevolutAccount from "./pages/RevolutAccount";
 import ChooseCard from "./pages/ChooseCard";
+import ChooseDueDate from "./pages/ChooseDueDate";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -32,6 +33,7 @@ const App = () => (
           <Route path="/credit-approved" element={<CreditApproved />} />
           <Route path="/revolut-account" element={<RevolutAccount />} />
           <Route path="/choose-card" element={<ChooseCard />} />
+          <Route path="/choose-due-date" element={<ChooseDueDate />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
