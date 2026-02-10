@@ -25,7 +25,7 @@ const QuizResult = () => {
       setProgress(pct);
       if (pct >= 100) {
         clearInterval(interval);
-        // TODO: navigate to final result
+        navigate("/credit-approved");
       }
     }, 50);
     return () => clearInterval(interval);
