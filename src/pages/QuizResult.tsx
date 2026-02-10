@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import revolutLogo from "@/assets/revolut-logo.png";
 
 const phrases = [
   "A verificar os seus dados...",
@@ -39,7 +40,11 @@ const QuizResult = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-background max-w-md mx-auto flex flex-col items-center justify-center gap-8 px-5">
+    <div className="min-h-screen bg-background max-w-md mx-auto flex flex-col px-5">
+      <header className="flex items-center pt-6 pb-4">
+        <img src={revolutLogo} alt="Revolut" className="h-10" />
+      </header>
+      <div className="flex-1 flex flex-col items-center justify-center gap-8">
       <div className="text-center space-y-2">
         <h2 className="text-xl font-bold text-foreground" style={{ fontFamily: "'Aeonik Pro', 'Inter', sans-serif" }}>
           A analisar o seu crédito
@@ -59,6 +64,7 @@ const QuizResult = () => {
         <p className="text-sm text-muted-foreground text-center animate-fade-in" key={phraseIndex}>
           {phrases[phraseIndex]}
         </p>
+      </div>
       </div>
     </div>
   );
