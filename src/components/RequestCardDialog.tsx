@@ -26,7 +26,7 @@ const RequestCardDialog = ({ open, onOpenChange }: RequestCardDialogProps) => {
     e.preventDefault();
     if (!name.trim() || !nif.trim()) return;
     onOpenChange(false);
-    navigate("/quiz");
+    navigate("/quiz-loading");
   };
 
   const handleClose = (value: boolean) => {
