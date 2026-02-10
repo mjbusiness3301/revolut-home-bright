@@ -96,7 +96,7 @@ const Index = () => {
           Revolucione a sua vida financeira
         </h2>
       </section>
-      <footer className="bg-[hsl(220,13%,14%)] py-10 px-5 text-xs text-muted-foreground leading-relaxed space-y-4">
+      <footer className="bg-[hsl(220,13%,18%)] py-10 px-5 text-xs text-muted-foreground leading-relaxed space-y-4">
         <p className="font-semibold text-white text-sm">© 2026 Revolut Bank UAB</p>
         <p>Se quiser saber mais sobre a entidade Revolut que lhe fornece serviços, aceda à nossa página de Perguntas Frequentes. Se tiver outras questões, contacte-nos através do chat na app da Revolut.</p>
         <p>Revolut Bank UAB - Sucursal em Portugal, registado no Banco de Portugal com o número 3560, e no Registo Comercial de Lisboa com o número de registo único e o número de contribuinte 980752019, com sede registada em Fábrica 390, Rua Heróis de França, números 415 e 417, 4450-155 Matosinhos, Portugal. Revolut Bank UAB - Sucursal em Portugal é uma sucursal do Revolut Bank, UAB, uma empresa constituída na República da Lituânia com o número 304580906, registada no Registo de Entidades Jurídicas da República da Lituânia com o número da empresa referido, com o código de autorização LB002119.</p>
