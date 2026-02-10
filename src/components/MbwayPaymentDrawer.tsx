@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Smartphone } from "lucide-react";
+import mbwayLogo from "@/assets/mbway-logo.png";
 
 interface MbwayPaymentDrawerProps {
   open: boolean;
@@ -73,8 +74,8 @@ const MbwayPaymentDrawer = ({ open, onOpenChange, amount }: MbwayPaymentDrawerPr
                   onClick={() => setStep("phone")}
                   className="w-full flex items-center gap-4 rounded-2xl border-2 border-border hover:border-primary px-5 py-4 text-left transition-all"
                 >
-                  <div className="flex items-center justify-center w-10 h-10 rounded-full bg-primary/10 shrink-0">
-                    <Smartphone className="w-5 h-5 text-primary" />
+                  <div className="flex items-center justify-center w-10 h-10 rounded-full bg-white border border-border shrink-0 overflow-hidden">
+                    <img src={mbwayLogo} alt="MB WAY" className="w-7 h-7 object-contain" />
                   </div>
                   <div>
                     <p className="text-sm font-bold text-foreground">MB WAY</p>
