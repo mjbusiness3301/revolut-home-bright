@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Drawer,
   DrawerContent,
@@ -16,6 +17,7 @@ interface RequestCardDialogProps {
 }
 
 const RequestCardDialog = ({ open, onOpenChange }: RequestCardDialogProps) => {
+  const navigate = useNavigate();
   const [name, setName] = useState("");
   const [nif, setNif] = useState("");
   const [submitted, setSubmitted] = useState(false);
@@ -23,7 +25,8 @@ const RequestCardDialog = ({ open, onOpenChange }: RequestCardDialogProps) => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!name.trim() || !nif.trim()) return;
-    setSubmitted(true);
+    onOpenChange(false);
+    navigate("/quiz");
   };
 
   const handleClose = (value: boolean) => {
