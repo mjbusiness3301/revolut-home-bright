@@ -13,6 +13,7 @@ import CreditApproved from "./pages/CreditApproved";
 import RevolutAccount from "./pages/RevolutAccount";
 import ChooseCard from "./pages/ChooseCard";
 import ChooseDueDate from "./pages/ChooseDueDate";
+import AddressPage from "./pages/AddressPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -34,6 +35,7 @@ const App = () => (
           <Route path="/revolut-account" element={<RevolutAccount />} />
           <Route path="/choose-card" element={<ChooseCard />} />
           <Route path="/choose-due-date" element={<ChooseDueDate />} />
+          <Route path="/address" element={<AddressPage />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
