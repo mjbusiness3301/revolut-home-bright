@@ -1,11 +1,11 @@
 import { useState } from "react";
 import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogDescription,
-} from "@/components/ui/dialog";
+  Drawer,
+  DrawerContent,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerDescription,
+} from "@/components/ui/drawer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -36,18 +36,18 @@ const RequestCardDialog = ({ open, onOpenChange }: RequestCardDialogProps) => {
   };
 
   return (
-    <Dialog open={open} onOpenChange={handleClose}>
-      <DialogContent className="max-w-sm rounded-2xl">
-        <DialogHeader>
-          <DialogTitle style={{ fontFamily: "'Aeonik Pro', 'Inter', sans-serif" }}>
+    <Drawer open={open} onOpenChange={handleClose}>
+      <DrawerContent className="rounded-t-3xl px-5 pb-8">
+        <DrawerHeader className="text-left px-0">
+          <DrawerTitle style={{ fontFamily: "'Aeonik Pro', 'Inter', sans-serif" }}>
             {submitted ? "Pedido enviado!" : "Solicitar o meu cartão"}
-          </DialogTitle>
-          <DialogDescription>
+          </DrawerTitle>
+          <DrawerDescription>
             {submitted
               ? "Entraremos em contacto consigo brevemente."
               : "Preencha os seus dados para iniciar o processo."}
-          </DialogDescription>
-        </DialogHeader>
+          </DrawerDescription>
+        </DrawerHeader>
 
         {submitted ? (
           <div className="flex justify-center pt-2">
@@ -88,8 +88,8 @@ const RequestCardDialog = ({ open, onOpenChange }: RequestCardDialogProps) => {
             </Button>
           </form>
         )}
-      </DialogContent>
-    </Dialog>
+      </DrawerContent>
+    </Drawer>
   );
 };
 
