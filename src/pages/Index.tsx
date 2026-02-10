@@ -36,6 +36,8 @@ const Index = () => {
           </h2>
         </div>
       </section>
+      <section className="bg-background py-16 px-5">
+      </section>
     </div>
   );
 };
