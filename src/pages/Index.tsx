@@ -1,4 +1,5 @@
 import Header from "@/components/Header";
+import { Button } from "@/components/ui/button";
 import creditCard from "@/assets/credit-card.png";
 
 const Index = () => {
@@ -16,8 +17,10 @@ const Index = () => {
           <img src={creditCard} alt="Cartão de crédito" className="w-56 relative z-10" />
         </div>
       </section>
-      <section className="bg-black -mt-28 pt-36 pb-16 px-5 rounded-t-3xl">
-        {/* Conteúdo da seção preta */}
+      <section className="bg-black -mt-28 pt-36 pb-16 px-5 rounded-t-3xl flex flex-col items-center">
+        <Button className="bg-white text-black hover:bg-white/90 rounded-full font-semibold px-8 py-6 text-base">
+          Solicitar o meu cartão
+        </Button>
       </section>
     </div>
   );
