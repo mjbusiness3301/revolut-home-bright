@@ -106,7 +106,7 @@ const AddressPage = () => {
           {firstName}, qual é a tua morada?
         </h1>
         <p className="text-sm text-muted-foreground mt-2 leading-relaxed">
-          Introduz o teu código postal para encontrarmos a tua morada automaticamente.
+          Introduz o teu código postal para encontrarmos a tua morada. É para lá que vamos enviar o teu cartão de crédito.
         </p>
 
         <div className="mt-8 space-y-4">
