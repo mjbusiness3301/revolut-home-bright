@@ -25,6 +25,17 @@ const questions = [
       { label: "D", text: "Não tenho clareza sobre as minhas dívidas" },
     ],
   },
+  {
+    category: "Último Passo",
+    title: "Finalidade do Crédito",
+    subtitle: "Qual será o principal destino do crédito solicitado?",
+    options: [
+      { label: "A", text: "Capital de trabalho / Negócio" },
+      { label: "B", text: "Pagamento ou consolidação de dívidas" },
+      { label: "C", text: "Compra de bens ou despesas pessoais" },
+      { label: "D", text: "Emergências, educação ou outros" },
+    ],
+  },
 ];
 
 const Quiz = () => {
