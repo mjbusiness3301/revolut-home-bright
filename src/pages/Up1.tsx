@@ -1,10 +1,13 @@
 import revolutLogo from "@/assets/revolut-logo.png";
 import { AlertTriangle } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useNavigate } from "react-router-dom";
 
 const Up1 = () => {
+  const navigate = useNavigate();
+
   const handleUpgrade = () => {
-    window.open("https://www.revolut.com/pt-PT/pricing/", "_blank");
+    navigate("/upgrade");
   };
 
   return (
