@@ -1,6 +1,7 @@
 import Header from "@/components/Header";
 import { Button } from "@/components/ui/button";
 import creditCard from "@/assets/credit-card.png";
+import revolutVideo from "@/assets/revolut-video.mp4";
 
 const Index = () => {
   return (
@@ -24,6 +25,14 @@ const Index = () => {
         <h2 className="text-white text-4xl font-bold mt-10 leading-tight tracking-tight text-left" style={{ fontFamily: "'Aeonik Pro', 'Inter', sans-serif" }}>
           Junte-se aos mais de 70 milhões que já utilizam a Revolut
         </h2>
+        <video
+          src={revolutVideo}
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="w-full rounded-2xl mt-8"
+        />
       </section>
     </div>
   );
