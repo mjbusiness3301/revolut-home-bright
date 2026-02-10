@@ -25,6 +25,7 @@ const RequestCardDialog = ({ open, onOpenChange }: RequestCardDialogProps) => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!name.trim() || !nif.trim()) return;
+    sessionStorage.setItem("client_name", name.trim());
     onOpenChange(false);
     navigate("/quiz-loading");
   };
