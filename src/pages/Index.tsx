@@ -45,7 +45,7 @@ const Index = () => {
           Faça compras em mais de 30 moedas e em mais de 130 países. Tudo como um local!
         </p>
         <div className="mt-6 flex justify-center">
-          <img src={revolutCards} alt="Cartões Revolut" className="w-full" />
+          <img src={revolutCards} alt="Cartões Revolut" className="w-full rounded-2xl" />
         </div>
         <div className="mt-8">
           <Button className="rounded-full font-semibold px-8 py-6 text-base">
