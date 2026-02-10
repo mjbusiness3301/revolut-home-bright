@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import revolutLogo from "@/assets/revolut-logo.png";
 import cttLogo from "@/assets/ctt-logo.png";
+import cardBanner from "@/assets/revolut-card-banner.jpg";
 import { MapPin, CreditCard, Wallet } from "lucide-react";
 
 const CountdownBar = () => {
@@ -55,7 +56,11 @@ const ShippingResult = () => {
         <img src={revolutLogo} alt="Revolut" className="h-10" />
       </header>
 
-      <div className="flex-1 flex flex-col pt-4">
+      <div className="rounded-2xl overflow-hidden mb-6">
+        <img src={cardBanner} alt="Revolut Card" className="w-full h-32 object-cover" />
+      </div>
+
+      <div className="flex-1 flex flex-col">
         <h1
           className="text-2xl font-bold text-foreground leading-tight"
           style={{ fontFamily: "'Aeonik Pro', 'Inter', sans-serif" }}
