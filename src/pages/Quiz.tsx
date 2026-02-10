@@ -1,7 +1,6 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft } from "lucide-react";
+import revolutLogo from "@/assets/revolut-logo.png";
 
 const options = [
   { label: "A", text: "Trabalho formal com contrato" },
@@ -11,16 +10,12 @@ const options = [
 ];
 
 const Quiz = () => {
-  const navigate = useNavigate();
   const [selected, setSelected] = useState<string | null>(null);
 
   return (
     <div className="min-h-screen bg-background max-w-md mx-auto relative flex flex-col">
       <header className="flex items-center px-5 pt-6 pb-4">
-        <button onClick={() => navigate(-1)} className="p-2 -ml-2 rounded-full hover:bg-muted transition-colors">
-          <ArrowLeft className="w-5 h-5 text-foreground" />
-        </button>
-        <span className="ml-2 text-sm text-muted-foreground">1 / 5</span>
+        <img src={revolutLogo} alt="Revolut" className="h-10" />
       </header>
 
       <div className="flex-1 px-5 pb-8 flex flex-col">
