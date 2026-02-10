@@ -21,15 +21,15 @@ const Upgrade = () => {
         </header>
 
         <div className="px-5 pt-8 space-y-6">
-          <h1 className="text-3xl font-bold leading-tight text-white" style={{ fontFamily: "'Aeonik Pro', Inter, sans-serif" }}>
+          <h1 className="text-3xl font-bold leading-tight text-foreground" style={{ fontFamily: "'Aeonik Pro', Inter, sans-serif" }}>
             A conta com extras bancários
           </h1>
-          <p className="text-white/80 text-sm leading-relaxed">
+          <p className="text-foreground/70 text-sm leading-relaxed">
             Para o consumidor inteligente: aceda a mais benefícios, como limites superiores e seguro de compras.
           </p>
 
           <Button
-            className="rounded-full text-sm font-semibold px-8 bg-white text-black hover:bg-white/90 shadow-lg"
+            className="rounded-full text-sm font-semibold px-8 bg-foreground text-background hover:bg-foreground/90 shadow-lg"
             size="lg"
           >
             Aderir ao Plus
