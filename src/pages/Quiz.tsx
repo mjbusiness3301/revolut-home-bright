@@ -2,15 +2,49 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import revolutLogo from "@/assets/revolut-logo.png";
 
-const options = [
-  { label: "A", text: "Trabalho formal com contrato" },
-  { label: "B", text: "Negócio próprio / Empreendedorismo" },
-  { label: "C", text: "Trabalho informal" },
-  { label: "D", text: "Reforma ou pensão / Sem rendimentos fixos" },
+const questions = [
+  {
+    category: "Informação Pessoal",
+    title: "Tipo de Rendimento",
+    subtitle: "Qual é a principal fonte dos seus rendimentos?",
+    options: [
+      { label: "A", text: "Trabalho formal com contrato" },
+      { label: "B", text: "Negócio próprio / Empreendedorismo" },
+      { label: "C", text: "Trabalho informal" },
+      { label: "D", text: "Reforma ou pensão / Sem rendimentos fixos" },
+    ],
+  },
+  {
+    category: "Situação Financeira",
+    title: "Dívidas Atuais",
+    subtitle: "Atualmente, tem:",
+    options: [
+      { label: "A", text: "Nenhuma dívida" },
+      { label: "B", text: "Dívidas controladas (até 30% dos meus rendimentos)" },
+      { label: "C", text: "Dívidas elevadas (mais de 30% dos meus rendimentos)" },
+      { label: "D", text: "Não tenho clareza sobre as minhas dívidas" },
+    ],
+  },
 ];
 
 const Quiz = () => {
-  const [selected, setSelected] = useState<string | null>(null);
+  const [step, setStep] = useState(0);
+  const [answers, setAnswers] = useState<(string | null)[]>(Array(questions.length).fill(null));
+
+  const current = questions[step];
+  const selected = answers[step];
+
+  const handleSelect = (label: string) => {
+    const next = [...answers];
+    next[step] = label;
+    setAnswers(next);
+  };
+
+  const handleContinue = () => {
+    if (step < questions.length - 1) {
+      setStep(step + 1);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-background max-w-md mx-auto relative flex flex-col">
@@ -19,19 +53,19 @@ const Quiz = () => {
       </header>
 
       <div className="flex-1 px-5 pb-8 flex flex-col">
-        <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2">Informação Pessoal</p>
+        <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2">{current.category}</p>
         <h1 className="text-2xl font-bold text-foreground leading-tight mb-1" style={{ fontFamily: "'Aeonik Pro', 'Inter', sans-serif" }}>
-          Tipo de Rendimento
+          {current.title}
         </h1>
         <p className="text-base text-muted-foreground mb-8">
-          Qual é a principal fonte dos seus rendimentos?
+          {current.subtitle}
         </p>
 
         <div className="space-y-3 flex-1">
-          {options.map((opt) => (
+          {current.options.map((opt) => (
             <button
               key={opt.label}
-              onClick={() => setSelected(opt.label)}
+              onClick={() => handleSelect(opt.label)}
               className={`w-full flex items-center gap-4 rounded-2xl border-2 px-5 py-4 text-left transition-all ${
                 selected === opt.label
                   ? "border-primary bg-primary/5"
@@ -52,6 +86,7 @@ const Quiz = () => {
 
         <Button
           disabled={!selected}
+          onClick={handleContinue}
           className="rounded-full font-semibold py-6 text-base w-full mt-6"
         >
           Continuar
