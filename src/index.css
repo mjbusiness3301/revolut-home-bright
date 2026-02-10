@@ -98,17 +98,39 @@
 
 @layer utilities {
   .pulse {
-    animation: pulse-glow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    position: relative;
+  }
+  .pulse::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 9999px;
+    border: 2px solid rgba(255, 255, 255, 0.6);
+    animation: pulse-border 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
   }
 }
 
-@keyframes pulse-glow {
+@keyframes pulse-ring {
   0%, 100% {
     transform: scale(1);
-    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.4);
   }
   50% {
-    transform: scale(1.05);
-    box-shadow: 0 0 20px 5px rgba(255, 255, 255, 0.2);
+    transform: scale(1);
+  }
+}
+
+@keyframes pulse-border {
+  0% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  50% {
+    transform: scale(1.15);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0;
   }
 }
