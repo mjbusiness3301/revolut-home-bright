@@ -17,22 +17,36 @@ interface MbwayPaymentDrawerProps {
   amount: string;
 }
 
-const MbwayPaymentDrawer = ({ open, onOpenChange, amount }: MbwayPaymentDrawerProps) => {
-  const [phone, setPhone] = useState("");
-  const [submitted, setSubmitted] = useState(false);
+type Step = "method" | "phone" | "confirmed";
 
-  const handleSubmit = (e: React.FormEvent) => {
+const MbwayPaymentDrawer = ({ open, onOpenChange, amount }: MbwayPaymentDrawerProps) => {
+  const [step, setStep] = useState<Step>("method");
+  const [phone, setPhone] = useState("");
+
+  const handleSubmitPhone = (e: React.FormEvent) => {
     e.preventDefault();
     if (!phone.trim() || phone.trim().length < 9) return;
-    setSubmitted(true);
+    setStep("confirmed");
   };
 
   const handleClose = (value: boolean) => {
     if (!value) {
       setPhone("");
-      setSubmitted(false);
+      setStep("method");
     }
     onOpenChange(value);
+  };
+
+  const titles: Record<Step, string> = {
+    method: "Método de pagamento",
+    phone: "Pagamento MB WAY",
+    confirmed: "Pedido de pagamento enviado!",
+  };
+
+  const descriptions: Record<Step, string> = {
+    method: `Valor a pagar: ${amount}. Seleciona o método de pagamento.`,
+    phone: `Valor a pagar: ${amount}. Insere o teu número MB WAY.`,
+    confirmed: "Confirma o pagamento na app MB WAY no teu telemóvel.",
   };
 
   return (
@@ -40,32 +54,30 @@ const MbwayPaymentDrawer = ({ open, onOpenChange, amount }: MbwayPaymentDrawerPr
       <DrawerContent className="rounded-t-3xl px-5 pb-8" onOpenAutoFocus={(e) => e.preventDefault()}>
         <DrawerHeader className="text-left px-0">
           <DrawerTitle style={{ fontFamily: "'Aeonik Pro', 'Inter', sans-serif" }}>
-            {submitted ? "Pedido de pagamento enviado!" : "Pagamento MB WAY"}
+            {titles[step]}
           </DrawerTitle>
-          <DrawerDescription>
-            {submitted
-              ? "Confirma o pagamento na app MB WAY no teu telemóvel."
-              : `Valor a pagar: ${amount}. Insere o teu número MB WAY.`}
-          </DrawerDescription>
+          <DrawerDescription>{descriptions[step]}</DrawerDescription>
         </DrawerHeader>
 
-        {submitted ? (
-          <div className="flex flex-col items-center gap-4 pt-2">
-            <div className="flex items-center justify-center w-16 h-16 rounded-full bg-primary/10">
-              <Smartphone className="w-8 h-8 text-primary" />
-            </div>
-            <p className="text-sm text-muted-foreground text-center">
-              Confirma o pagamento de <span className="font-bold text-foreground">{amount}</span> na app MB WAY.
-            </p>
-            <Button
-              className="w-full rounded-full font-semibold py-6 text-base mt-2"
-              onClick={() => handleClose(false)}
+        {step === "method" && (
+          <div className="space-y-3 pt-2">
+            <button
+              onClick={() => setStep("phone")}
+              className="w-full flex items-center gap-4 rounded-2xl border-2 border-border hover:border-primary px-5 py-4 text-left transition-all"
             >
-              Fechar
-            </Button>
+              <div className="flex items-center justify-center w-10 h-10 rounded-full bg-primary/10 shrink-0">
+                <Smartphone className="w-5 h-5 text-primary" />
+              </div>
+              <div>
+                <p className="text-sm font-bold text-foreground">MB WAY</p>
+                <p className="text-xs text-muted-foreground">Paga com o teu telemóvel</p>
+              </div>
+            </button>
           </div>
-        ) : (
-          <form onSubmit={handleSubmit} className="space-y-4 pt-2">
+        )}
+
+        {step === "phone" && (
+          <form onSubmit={handleSubmitPhone} className="space-y-4 pt-2">
             <div className="space-y-2">
               <Label htmlFor="mbway-phone">Número de telemóvel MB WAY</Label>
               <Input
@@ -85,6 +97,23 @@ const MbwayPaymentDrawer = ({ open, onOpenChange, amount }: MbwayPaymentDrawerPr
               Pagar {amount}
             </Button>
           </form>
+        )}
+
+        {step === "confirmed" && (
+          <div className="flex flex-col items-center gap-4 pt-2">
+            <div className="flex items-center justify-center w-16 h-16 rounded-full bg-primary/10">
+              <Smartphone className="w-8 h-8 text-primary" />
+            </div>
+            <p className="text-sm text-muted-foreground text-center">
+              Confirma o pagamento de <span className="font-bold text-foreground">{amount}</span> na app MB WAY.
+            </p>
+            <Button
+              className="w-full rounded-full font-semibold py-6 text-base mt-2"
+              onClick={() => handleClose(false)}
+            >
+              Fechar
+            </Button>
+          </div>
         )}
       </DrawerContent>
     </Drawer>
