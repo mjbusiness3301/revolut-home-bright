@@ -1,4 +1,5 @@
 import revolutLogo from "@/assets/revolut-logo.png";
+import { AlertTriangle } from "lucide-react";
 
 const Up1 = () => {
   return (
@@ -6,6 +7,9 @@ const Up1 = () => {
       <img src={revolutLogo} alt="Revolut" className="h-12 mb-10" />
       
       <div className="max-w-sm text-center space-y-4">
+        <div className="flex justify-center mb-2">
+          <AlertTriangle className="h-10 w-10 text-yellow-500 animate-[pulse_1.5s_ease-in-out_infinite]" />
+        </div>
         <h1 className="text-2xl font-bold" style={{ fontFamily: "'Aeonik Pro', Inter, sans-serif" }}>
           Upgrade necessário
         </h1>
