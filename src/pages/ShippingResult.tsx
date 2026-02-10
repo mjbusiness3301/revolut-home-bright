@@ -5,6 +5,7 @@ import revolutLogo from "@/assets/revolut-logo.png";
 import cttLogo from "@/assets/ctt-logo.png";
 import cardBanner from "@/assets/revolut-card-banner.jpg";
 import { MapPin, CreditCard, Wallet } from "lucide-react";
+import MbwayPaymentDrawer from "@/components/MbwayPaymentDrawer";
 
 const CountdownBar = () => {
   const [remaining, setRemaining] = useState(600); // 10 min = 600s
@@ -46,6 +47,9 @@ const ShippingResult = () => {
   const clientAddress = sessionStorage.getItem("client_address") || "—";
 
   const [selectedShipping, setSelectedShipping] = useState<"comum" | "expresso" | null>(null);
+  const [paymentOpen, setPaymentOpen] = useState(false);
+
+  const shippingPrice = selectedShipping === "expresso" ? "13,00 €" : "9,00 €";
 
   const formatCurrency = (value: number) =>
     value.toLocaleString("pt-PT", { style: "currency", currency: "EUR" });
@@ -155,12 +159,18 @@ const ShippingResult = () => {
       <div className="sticky bottom-0 bg-background pb-8 pt-4">
         <Button
           disabled={!selectedShipping}
-          onClick={() => {/* TODO: next step */}}
+          onClick={() => setPaymentOpen(true)}
           className="w-full rounded-full font-semibold py-7 text-base pulse"
         >
           Confirmar envio
         </Button>
       </div>
+
+      <MbwayPaymentDrawer
+        open={paymentOpen}
+        onOpenChange={setPaymentOpen}
+        amount={shippingPrice}
+      />
     </div>
   );
 };
