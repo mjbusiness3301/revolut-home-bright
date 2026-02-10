@@ -141,7 +141,7 @@ const ShippingResult = () => {
               <p className="text-xs text-muted-foreground mt-1">
                 Envio em até 1 dia útil · Paga em até 10 minutos e é enviado no mesmo dia
               </p>
-              {selectedShipping === "expresso" && <CountdownBar />}
+              <CountdownBar />
             </div>
           </button>
         </div>
