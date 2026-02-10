@@ -52,7 +52,7 @@ const AddressPage = () => {
     }
 
     const controller = new AbortController();
-    const fetchAddress = async () => {
+    const timer = setTimeout(async () => {
       setLoading(true);
       setError("");
       try {
@@ -62,8 +62,14 @@ const AddressPage = () => {
           `https://json.geoapi.pt/cp/${cp4}-${cp3}`,
           { signal: controller.signal }
         );
+        if (res.status === 429) {
+          setError("Serviço temporariamente indisponível. Preenche a morada manualmente.");
+          setManual(true);
+          return;
+        }
         if (!res.ok) throw new Error("not found");
         const data = await res.json();
+        if (data.erro) throw new Error("not found");
         const rua = data.partes?.[0]?.["Artéria"] || data.partes?.[0]?.Artéria || "";
         setAddressData({
           rua,
@@ -80,10 +86,12 @@ const AddressPage = () => {
       } finally {
         setLoading(false);
       }
-    };
+    }, 500);
 
-    fetchAddress();
-    return () => controller.abort();
+    return () => {
+      clearTimeout(timer);
+      controller.abort();
+    };
   }, [postalCode]);
 
   const fullAddress = addressData
