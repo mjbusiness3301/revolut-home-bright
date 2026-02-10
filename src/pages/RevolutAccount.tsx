@@ -24,14 +24,14 @@ const RevolutAccount = () => {
 
         <div className="w-full space-y-3 mt-4">
           <Button
-            onClick={() => {/* TODO: next step */}}
+            onClick={() => navigate("/choose-card")}
             className="w-full rounded-full font-semibold py-7 text-base"
           >
             Sim, já tenho conta
           </Button>
           <Button
             variant="outline"
-            onClick={() => {/* TODO: next step */}}
+            onClick={() => navigate("/choose-card")}
             className="w-full rounded-full font-semibold py-7 text-base"
           >
             Não, ainda não tenho
