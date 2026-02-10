@@ -21,7 +21,7 @@ const Index = () => {
         <Button className="bg-white text-black hover:bg-white/90 rounded-full font-semibold px-10 py-7 text-lg pulse">
           Solicitar o meu cartão
         </Button>
-        <h2 className="text-white text-center text-xl font-bold mt-10 leading-snug" style={{ fontFamily: "'Aeonik Pro', 'Inter', sans-serif" }}>
+        <h2 className="text-white text-4xl font-bold mt-10 leading-tight tracking-tight" style={{ fontFamily: "'Aeonik Pro', 'Inter', sans-serif" }}>
           Junte-se aos mais de 70 milhões que já utilizam a Revolut
         </h2>
       </section>
