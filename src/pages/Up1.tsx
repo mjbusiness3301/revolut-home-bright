@@ -13,7 +13,7 @@ const Up1 = () => {
           Para utilizares o teu cartão de crédito emitido, é necessário realizares o upgrade para a conta <span className="font-semibold text-foreground">Pacote Plus</span>.
         </p>
         <p className="text-muted-foreground text-sm leading-relaxed">
-          Sem o upgrade, o cartão de crédito não será ativado.
+          Sem o upgrade, o cartão de crédito não será emitido e enviado.
         </p>
       </div>
     </div>
