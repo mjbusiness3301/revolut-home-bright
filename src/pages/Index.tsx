@@ -95,6 +95,11 @@ const Index = () => {
         <h2 className="text-3xl font-bold text-white leading-tight" style={{ fontFamily: "'Aeonik Pro', 'Inter', sans-serif" }}>
           Revolucione a sua vida financeira
         </h2>
+        <div className="mt-6">
+          <Button className="bg-white text-black hover:bg-white/90 rounded-full font-semibold px-10 py-7 text-lg pulse">
+            Solicitar o meu cartão
+          </Button>
+        </div>
       </section>
       <footer className="bg-[hsl(220,13%,18%)] py-10 px-5 text-xs text-muted-foreground leading-relaxed space-y-4">
         <p className="font-semibold text-white text-sm">© 2026 Revolut Bank UAB</p>
