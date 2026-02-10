@@ -10,7 +10,7 @@ const phrases = [
   "Quase pronto...",
 ];
 
-const TOTAL_DURATION = 6000;
+const TOTAL_DURATION = 8000;
 const PHRASE_INTERVAL = TOTAL_DURATION / phrases.length;
 
 const QuizResult = () => {
