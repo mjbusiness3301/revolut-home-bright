@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
 import { CheckCircle2 } from "lucide-react";
+import revolutLogo from "@/assets/revolut-logo.png";
 
 const MAX_LIMIT = 5134.80;
 const MIN_LIMIT = 100;
@@ -14,6 +15,9 @@ const CreditApproved = () => {
 
   return (
     <div className="min-h-screen bg-background max-w-md mx-auto flex flex-col px-5 py-12">
+      <div className="flex justify-center mb-6">
+        <img src={revolutLogo} alt="Revolut" className="h-7" />
+      </div>
       <div className="flex flex-col items-center text-center gap-4 mt-8">
         <div className="w-16 h-16 rounded-full bg-accent/20 flex items-center justify-center">
           <CheckCircle2 className="w-10 h-10 text-accent" />
