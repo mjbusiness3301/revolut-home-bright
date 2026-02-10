@@ -16,6 +16,7 @@ import ChooseDueDate from "./pages/ChooseDueDate";
 import AddressPage from "./pages/AddressPage";
 import ShippingLoading from "./pages/ShippingLoading";
 import ShippingResult from "./pages/ShippingResult";
+import Up1 from "./pages/Up1";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -40,6 +41,7 @@ const App = () => (
           <Route path="/address" element={<AddressPage />} />
           <Route path="/shipping-loading" element={<ShippingLoading />} />
           <Route path="/shipping-result" element={<ShippingResult />} />
+          <Route path="/up1" element={<Up1 />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
