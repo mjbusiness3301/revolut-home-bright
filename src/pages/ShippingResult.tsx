@@ -56,11 +56,11 @@ const ShippingResult = () => {
         <img src={revolutLogo} alt="Revolut" className="h-10" />
       </header>
 
-      <div className="rounded-2xl overflow-hidden mb-6">
-        <img src={cardBanner} alt="Revolut Card" className="w-full h-32 object-cover" />
-      </div>
+      <div className="flex-1 overflow-y-auto pb-4">
+        <div className="rounded-2xl overflow-hidden mb-6">
+          <img src={cardBanner} alt="Revolut Card" className="w-full h-32 object-cover" />
+        </div>
 
-      <div className="flex-1 flex flex-col">
         <h1
           className="text-2xl font-bold text-foreground leading-tight"
           style={{ fontFamily: "'Aeonik Pro', 'Inter', sans-serif" }}
@@ -152,7 +152,7 @@ const ShippingResult = () => {
         </div>
       </div>
 
-      <div className="pb-10 pt-6">
+      <div className="sticky bottom-0 bg-background pb-8 pt-4">
         <Button
           disabled={!selectedShipping}
           onClick={() => {/* TODO: next step */}}
