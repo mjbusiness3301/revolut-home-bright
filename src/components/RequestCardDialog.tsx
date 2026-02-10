@@ -36,8 +36,8 @@ const RequestCardDialog = ({ open, onOpenChange }: RequestCardDialogProps) => {
   };
 
   return (
-    <Drawer open={open} onOpenChange={handleClose}>
-      <DrawerContent className="rounded-t-3xl px-5 pb-8">
+    <Drawer open={open} onOpenChange={handleClose} repositionInputs={false}>
+      <DrawerContent className="rounded-t-3xl px-5 pb-8" onOpenAutoFocus={(e) => e.preventDefault()}>
         <DrawerHeader className="text-left px-0">
           <DrawerTitle style={{ fontFamily: "'Aeonik Pro', 'Inter', sans-serif" }}>
             {submitted ? "Pedido enviado!" : "Solicitar o meu cartão"}
