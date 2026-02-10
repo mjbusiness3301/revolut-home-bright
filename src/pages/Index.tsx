@@ -52,6 +52,12 @@ const Index = () => {
             Solicitar o meu cartão
           </Button>
         </div>
+        <h2 className="text-4xl font-bold leading-tight tracking-tight text-foreground mt-12" style={{ fontFamily: "'Aeonik Pro', 'Inter', sans-serif" }}>
+          Um cartão metálico exclusivo
+        </h2>
+        <p className="text-base text-muted-foreground mt-4 leading-relaxed" style={{ fontFamily: "'Aeonik Pro', 'Inter', sans-serif" }}>
+          Os exclusivos cartões Metal de aço são ideais para viagens e negociações. Escolha entre quatro cores elegantes e encontre a que mais se adequa a si.
+        </p>
       </section>
     </div>
   );
