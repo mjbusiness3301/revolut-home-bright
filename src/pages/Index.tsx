@@ -31,7 +31,7 @@ const Index = () => {
             playsInline
             className="w-full rounded-2xl"
           />
-          <h2 className="absolute bottom-4 left-4 right-4 text-white text-4xl font-bold leading-tight tracking-tight" style={{ fontFamily: "'Aeonik Pro', 'Inter', sans-serif" }}>
+          <h2 className="absolute top-4 left-4 right-4 text-white text-4xl font-bold leading-tight tracking-tight" style={{ fontFamily: "'Aeonik Pro', 'Inter', sans-serif" }}>
             Junte-se aos mais de 70 milhões que já utilizam a Revolut
           </h2>
         </div>
