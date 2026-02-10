@@ -22,7 +22,7 @@ const Index = () => {
         <Button className="bg-white text-black hover:bg-white/90 rounded-full font-semibold px-10 py-7 text-lg pulse">
           Solicitar o meu cartão
         </Button>
-        <h2 className="text-white text-4xl font-bold mt-10 leading-tight tracking-tight text-left" style={{ fontFamily: "'Aeonik Pro', 'Inter', sans-serif" }}>
+        <h2 className="text-white text-4xl font-bold mt-10 mb-0 leading-tight tracking-tight text-left w-full" style={{ fontFamily: "'Aeonik Pro', 'Inter', sans-serif" }}>
           Junte-se aos mais de 70 milhões que já utilizam a Revolut
         </h2>
         <video
@@ -31,7 +31,7 @@ const Index = () => {
           loop
           muted
           playsInline
-          className="w-full rounded-2xl mt-4"
+          className="w-full rounded-2xl mt-2"
         />
       </section>
     </div>
