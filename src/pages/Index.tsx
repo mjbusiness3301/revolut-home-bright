@@ -2,6 +2,7 @@ import Header from "@/components/Header";
 import { Button } from "@/components/ui/button";
 import creditCard from "@/assets/credit-card.png";
 import revolutVideo from "@/assets/revolut-video.mp4";
+import revolutCards from "@/assets/revolut-cards.png";
 
 const Index = () => {
   return (
@@ -43,6 +44,9 @@ const Index = () => {
         <p className="text-base text-muted-foreground mt-4 leading-relaxed" style={{ fontFamily: "'Aeonik Pro', 'Inter', sans-serif" }}>
           Faça compras em mais de 30 moedas e em mais de 130 países. Tudo como um local!
         </p>
+        <div className="mt-6 flex justify-center">
+          <img src={revolutCards} alt="Cartões Revolut" className="w-full" />
+        </div>
         <div className="mt-8">
           <Button className="rounded-full font-semibold px-8 py-6 text-base">
             Solicitar o meu cartão
