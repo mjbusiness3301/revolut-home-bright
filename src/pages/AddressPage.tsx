@@ -7,10 +7,11 @@ import revolutLogo from "@/assets/revolut-logo.png";
 import { CheckCircle2, Loader2 } from "lucide-react";
 
 interface AddressData {
-  distrito: string;
+  rua: string;
+  localidade: string;
   concelho: string;
-  freguesia: string;
-  morada: string;
+  distrito: string;
+  designacao: string;
 }
 
 const AddressPage = () => {
@@ -63,11 +64,13 @@ const AddressPage = () => {
         );
         if (!res.ok) throw new Error("not found");
         const data = await res.json();
+        const rua = data.partes?.[0]?.["Artéria"] || data.partes?.[0]?.Artéria || "";
         setAddressData({
-          distrito: data.Distrito || data.distrito || "",
+          rua,
+          localidade: data.Localidade || data.localidade || "",
           concelho: data.Concelho || data.concelho || "",
-          freguesia: data.Freguesia || data.freguesia || "",
-          morada: data.Morada || data.morada || data.rua || "",
+          distrito: data.Distrito || data.distrito || "",
+          designacao: data["Designação Postal"] || "",
         });
       } catch (err: unknown) {
         if (err instanceof Error && err.name !== "AbortError") {
@@ -84,7 +87,7 @@ const AddressPage = () => {
   }, [postalCode]);
 
   const fullAddress = addressData
-    ? `${addressData.morada ? addressData.morada + ", " : ""}${addressData.freguesia}, ${addressData.concelho}, ${addressData.distrito}`
+    ? `${addressData.rua ? addressData.rua + ", " : ""}${addressData.localidade}, ${addressData.concelho}, ${addressData.distrito}`
     : "";
 
   const canProceed = confirmed || (manual && manualAddress.trim().length > 5);
