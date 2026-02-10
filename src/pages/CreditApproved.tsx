@@ -15,9 +15,9 @@ const CreditApproved = () => {
 
   return (
     <div className="min-h-screen bg-background max-w-md mx-auto flex flex-col px-5 py-12">
-      <div className="flex justify-center mb-6">
-        <img src={revolutLogo} alt="Revolut" className="h-7" />
-      </div>
+      <header className="flex items-center pt-0 pb-4 -mt-6">
+        <img src={revolutLogo} alt="Revolut" className="h-10" />
+      </header>
       <div className="flex flex-col items-center text-center gap-4 mt-8">
         <div className="w-16 h-16 rounded-full bg-accent/20 flex items-center justify-center">
           <CheckCircle2 className="w-10 h-10 text-accent" />
