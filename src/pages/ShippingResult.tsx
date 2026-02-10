@@ -122,7 +122,7 @@ const ShippingResult = () => {
                 <p className="text-sm font-bold text-foreground">9,00 €</p>
               </div>
               <p className="text-xs text-muted-foreground mt-1">
-                Envio em até 8 dias úteis
+                1 dia de produção + 7 dias de envio
               </p>
             </div>
           </button>
@@ -144,7 +144,7 @@ const ShippingResult = () => {
                 <p className="text-sm font-bold text-foreground">13,00 €</p>
               </div>
               <p className="text-xs text-muted-foreground mt-1">
-                Envio em até 1 dia útil · Paga em até 10 minutos e é enviado no mesmo dia
+                1 dia de produção + 1 dia de envio · Paga em até 10 minutos e é enviado no mesmo dia
               </p>
               <CountdownBar />
             </div>
