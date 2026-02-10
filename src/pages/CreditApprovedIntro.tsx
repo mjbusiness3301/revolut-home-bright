@@ -30,7 +30,7 @@ const CreditApprovedIntro = () => {
             Parabéns, <span className="font-semibold text-foreground">{firstName}</span>! O teu crédito foi aprovado.
           </p>
           <p className="text-sm text-muted-foreground leading-relaxed">
-            Tens um limite pré-aprovado de até <span className="font-semibold text-foreground">5.134,80 €</span>. No próximo passo, podes escolher o valor que pretendes ter disponível no teu cartão.
+            Tens um limite pré-aprovado de até <span className="font-semibold text-foreground">€5.134,80</span>. No próximo passo, podes escolher o valor que pretendes ter disponível no teu cartão.
           </p>
         </div>
       </div>

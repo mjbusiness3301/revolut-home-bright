@@ -13,7 +13,7 @@ const CreditApproved = () => {
   const [amount, setAmount] = useState(MAX_LIMIT);
 
   const formatCurrency = (value: number) =>
-    value.toLocaleString("pt-PT", { style: "currency", currency: "EUR" });
+    "€" + value.toLocaleString("pt-PT", { minimumFractionDigits: 2 });
 
   return (
     <div className="min-h-screen bg-background max-w-md mx-auto flex flex-col px-5 py-12">

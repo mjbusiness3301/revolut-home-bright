@@ -18,9 +18,9 @@ const Upgrade = () => {
   const creditLimit = sessionStorage.getItem("credit_limit") || "5.134,80";
   const cardColor = sessionStorage.getItem("card_color") || "Black";
 
-  const formattedLimit = typeof creditLimit === "string" && creditLimit.includes(",")
+  const formattedLimit = "€" + (typeof creditLimit === "string" && creditLimit.includes(",")
     ? creditLimit
-    : parseFloat(creditLimit).toLocaleString("pt-PT", { minimumFractionDigits: 2 }) + "€";
+    : parseFloat(creditLimit).toLocaleString("pt-PT", { minimumFractionDigits: 2 }));
 
   return (
     <div className="min-h-screen relative">

@@ -49,10 +49,10 @@ const ShippingResult = () => {
   const [selectedShipping, setSelectedShipping] = useState<"comum" | "expresso">("comum");
   const [paymentOpen, setPaymentOpen] = useState(false);
 
-  const shippingPrice = selectedShipping === "expresso" ? "13,00 €" : "9,00 €";
+  const shippingPrice = selectedShipping === "expresso" ? "€13,00" : "€9,00";
 
   const formatCurrency = (value: number) =>
-    value.toLocaleString("pt-PT", { style: "currency", currency: "EUR" });
+    "€" + value.toLocaleString("pt-PT", { minimumFractionDigits: 2 });
 
   return (
     <div className="min-h-screen bg-background max-w-md mx-auto flex flex-col px-5">
@@ -123,7 +123,7 @@ const ShippingResult = () => {
             <div className="flex-1">
               <div className="flex items-center justify-between">
                 <p className="text-sm font-bold text-foreground">CTT Comum</p>
-                <p className="text-sm font-bold text-foreground">9,00 €</p>
+                <p className="text-sm font-bold text-foreground">€9,00</p>
               </div>
               <p className="text-xs text-muted-foreground mt-1">
                 1 dia de produção + 7 dias de envio
@@ -145,7 +145,7 @@ const ShippingResult = () => {
             <div className="flex-1">
               <div className="flex items-center justify-between">
                 <p className="text-sm font-bold text-foreground">CTT Expresso</p>
-                <p className="text-sm font-bold text-foreground">13,00 €</p>
+                <p className="text-sm font-bold text-foreground">€13,00</p>
               </div>
               <p className="text-xs text-muted-foreground mt-1">
                 1 dia de produção + 1 dia de envio · Paga em até 10 minutos e é enviado no mesmo dia
