@@ -46,7 +46,7 @@ const ShippingResult = () => {
   const cardColor = sessionStorage.getItem("card_color") || "Black";
   const clientAddress = sessionStorage.getItem("client_address") || "—";
 
-  const [selectedShipping, setSelectedShipping] = useState<"comum" | "expresso" | null>(null);
+  const [selectedShipping, setSelectedShipping] = useState<"comum" | "expresso">("comum");
   const [paymentOpen, setPaymentOpen] = useState(false);
 
   const shippingPrice = selectedShipping === "expresso" ? "13,00 €" : "9,00 €";
