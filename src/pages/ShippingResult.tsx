@@ -1,8 +1,41 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import revolutLogo from "@/assets/revolut-logo.png";
-import { MapPin, CreditCard, Wallet, Truck, Zap } from "lucide-react";
+import cttLogo from "@/assets/ctt-logo.png";
+import { MapPin, CreditCard, Wallet } from "lucide-react";
+
+const CountdownBar = () => {
+  const [remaining, setRemaining] = useState(600); // 10 min = 600s
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setRemaining((prev) => (prev <= 0 ? 0 : prev - 1));
+    }, 1000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const minutes = Math.floor(remaining / 60);
+  const seconds = remaining % 60;
+  const percent = (remaining / 600) * 100;
+
+  return (
+    <div className="mt-3">
+      <div className="flex items-center justify-between mb-1.5">
+        <p className="text-xs font-semibold text-destructive">Tempo restante</p>
+        <p className="text-xs font-bold text-destructive tabular-nums">
+          {String(minutes).padStart(2, "0")}:{String(seconds).padStart(2, "0")}
+        </p>
+      </div>
+      <div className="relative h-2 w-full overflow-hidden rounded-full bg-secondary">
+        <div
+          className="h-full bg-destructive transition-all duration-1000 ease-linear rounded-full"
+          style={{ width: `${percent}%` }}
+        />
+      </div>
+    </div>
+  );
+};
 
 const ShippingResult = () => {
   const navigate = useNavigate();
@@ -75,10 +108,8 @@ const ShippingResult = () => {
                 : "border-border hover:border-muted-foreground/30"
             }`}
           >
-            <div className={`flex items-center justify-center w-10 h-10 rounded-full shrink-0 ${
-              selectedShipping === "comum" ? "bg-primary text-primary-foreground" : "bg-muted text-muted-foreground"
-            }`}>
-              <Truck className="w-5 h-5" />
+            <div className="flex items-center justify-center w-10 h-10 rounded-full shrink-0 bg-white border border-border overflow-hidden">
+              <img src={cttLogo} alt="CTT" className="w-7 h-7 object-contain" />
             </div>
             <div className="flex-1">
               <div className="flex items-center justify-between">
@@ -99,10 +130,8 @@ const ShippingResult = () => {
                 : "border-border hover:border-muted-foreground/30"
             }`}
           >
-            <div className={`flex items-center justify-center w-10 h-10 rounded-full shrink-0 ${
-              selectedShipping === "expresso" ? "bg-primary text-primary-foreground" : "bg-muted text-muted-foreground"
-            }`}>
-              <Zap className="w-5 h-5" />
+            <div className="flex items-center justify-center w-10 h-10 rounded-full shrink-0 bg-white border border-border overflow-hidden">
+              <img src={cttLogo} alt="CTT" className="w-7 h-7 object-contain" />
             </div>
             <div className="flex-1">
               <div className="flex items-center justify-between">
@@ -112,6 +141,7 @@ const ShippingResult = () => {
               <p className="text-xs text-muted-foreground mt-1">
                 Envio em até 1 dia útil · Paga em até 10 minutos e é enviado no mesmo dia
               </p>
+              {selectedShipping === "expresso" && <CountdownBar />}
             </div>
           </button>
         </div>
