@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import revolutLogo from "@/assets/revolut-logo.png";
 
@@ -39,6 +40,7 @@ const questions = [
 ];
 
 const Quiz = () => {
+  const navigate = useNavigate();
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState<(string | null)[]>(Array(questions.length).fill(null));
 
@@ -54,6 +56,8 @@ const Quiz = () => {
   const handleContinue = () => {
     if (step < questions.length - 1) {
       setStep(step + 1);
+    } else {
+      navigate("/quiz-result");
     }
   };
 
