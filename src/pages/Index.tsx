@@ -31,7 +31,7 @@ const Index = () => {
           loop
           muted
           playsInline
-          className="w-full rounded-2xl mt-8"
+          className="w-full rounded-2xl mt-4"
         />
       </section>
     </div>
