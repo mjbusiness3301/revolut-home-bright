@@ -62,7 +62,7 @@ const ChooseCard = () => {
 
       <div className="pb-10 pt-6">
         <Button
-          onClick={() => {/* TODO: next step */}}
+          onClick={() => navigate("/choose-due-date")}
           className="w-full rounded-full font-semibold py-7 text-base pulse"
         >
           Confirmar cartão
