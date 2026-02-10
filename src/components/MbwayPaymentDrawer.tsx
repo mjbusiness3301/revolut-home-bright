@@ -45,8 +45,8 @@ const MbwayPaymentDrawer = ({ open, onOpenChange, amount }: MbwayPaymentDrawerPr
   };
 
   const descriptions: Record<Step, string> = {
-    method: `Valor a pagar: ${amount}. Seleciona o método de pagamento.`,
-    phone: `Valor a pagar: ${amount}. Insere o teu número MB WAY.`,
+    method: "",
+    phone: "",
     confirmed: "Confirma o pagamento na app MB WAY no teu telemóvel.",
   };
 
