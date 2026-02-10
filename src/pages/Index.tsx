@@ -1,4 +1,5 @@
 import Header from "@/components/Header";
+import creditCard from "@/assets/credit-card.png";
 
 const Index = () => {
   return (
@@ -11,6 +12,9 @@ const Index = () => {
         <p className="text-base text-muted-foreground mt-4 leading-relaxed" style={{ fontFamily: "'Aeonik Pro', 'Inter', sans-serif" }}>
           Mesmo que tenha tido dificuldades financeiras no passado, o seu acesso ao crédito pode não estar perdido. Fazemos uma avaliação individual e responsável, focada na sua realidade atual, mesmo com registo de incumprimento na CRC.
         </p>
+        <div className="mt-8 flex justify-center">
+          <img src={creditCard} alt="Cartão de crédito" className="w-64 max-w-full" />
+        </div>
       </section>
     </div>
   );
