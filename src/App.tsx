@@ -8,6 +8,7 @@ import Quiz from "./pages/Quiz";
 import QuizLoading from "./pages/QuizLoading";
 import QuizResult from "./pages/QuizResult";
 import CreditApprovedIntro from "./pages/CreditApprovedIntro";
+import CreditLimitLoading from "./pages/CreditLimitLoading";
 import CreditApproved from "./pages/CreditApproved";
 import NotFound from "./pages/NotFound";
 
@@ -25,6 +26,7 @@ const App = () => (
           <Route path="/quiz-loading" element={<QuizLoading />} />
           <Route path="/quiz-result" element={<QuizResult />} />
           <Route path="/credit-approved-intro" element={<CreditApprovedIntro />} />
+          <Route path="/credit-limit-loading" element={<CreditLimitLoading />} />
           <Route path="/credit-approved" element={<CreditApproved />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
