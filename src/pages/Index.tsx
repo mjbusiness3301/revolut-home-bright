@@ -37,6 +37,17 @@ const Index = () => {
         </div>
       </section>
       <section className="bg-background py-16 px-5">
+        <h2 className="text-4xl font-bold leading-tight tracking-tight text-foreground" style={{ fontFamily: "'Aeonik Pro', 'Inter', sans-serif" }}>
+          Eleve o seu modo de gastar
+        </h2>
+        <p className="text-base text-muted-foreground mt-4 leading-relaxed" style={{ fontFamily: "'Aeonik Pro', 'Inter', sans-serif" }}>
+          Faça compras em mais de 30 moedas e em mais de 130 países. Tudo como um local!
+        </p>
+        <div className="mt-8">
+          <Button className="rounded-full font-semibold px-8 py-6 text-base">
+            Solicitar o meu cartão
+          </Button>
+        </div>
       </section>
     </div>
   );
