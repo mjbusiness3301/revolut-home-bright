@@ -1,5 +1,6 @@
 import { useState } from "react";
 import revolutLogo from "@/assets/revolut-logo.png";
+import revolutPlusVideo from "@/assets/revolut-plus-video-2.mp4";
 import { AlertTriangle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -51,6 +52,17 @@ const Up1 = () => {
             Fazer upgrade agora
           </Button>
         </div>
+      </div>
+
+      <div className="px-6 mb-10">
+        <video
+          className="w-full rounded-2xl"
+          autoPlay
+          muted
+          playsInline
+        >
+          <source src={revolutPlusVideo} type="video/mp4" />
+        </video>
       </div>
 
       <Drawer open={drawerOpen} onOpenChange={setDrawerOpen}>
