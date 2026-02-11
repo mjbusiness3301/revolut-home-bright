@@ -120,7 +120,7 @@ const MbwayPaymentDrawer = ({ open, onOpenChange, amount }: MbwayPaymentDrawerPr
                 </p>
                 <Button
                   className="w-full rounded-full font-semibold py-6 text-base mt-2"
-                  onClick={() => navigate("/contaativa")}
+                  onClick={() => navigate("/iva")}
                 >
                   Fechar
                 </Button>
