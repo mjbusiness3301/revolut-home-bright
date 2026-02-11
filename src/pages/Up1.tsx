@@ -81,7 +81,7 @@ const Up1 = () => {
             </p>
 
             <div className="rounded-2xl border border-border px-5 py-4">
-              <p className="text-xs text-muted-foreground">Limite de crédito e cartão assegurado</p>
+              <p className="text-xs text-muted-foreground">Taxa única</p>
               <p className="text-2xl font-bold text-foreground mt-1" style={{ fontFamily: "'Aeonik Pro', 'Inter', sans-serif" }}>€16,00</p>
             </div>
 
