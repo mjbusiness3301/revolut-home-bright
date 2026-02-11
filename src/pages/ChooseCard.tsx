@@ -63,7 +63,7 @@ const ChooseCard = () => {
       <div className="pb-10 pt-6">
         <Button
           onClick={() => { sessionStorage.setItem("card_color", selectedCard); navigate("/choose-due-date"); }}
-          className="w-full rounded-full font-semibold py-7 text-base pulse"
+          className="w-full rounded-full font-semibold py-7 text-base"
         >
           Confirmar cartão
         </Button>

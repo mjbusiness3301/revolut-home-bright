@@ -38,7 +38,7 @@ const CreditApprovedIntro = () => {
       <div className="pb-10 pt-6">
         <Button
           onClick={() => navigate("/credit-limit-loading")}
-          className="w-full rounded-full font-semibold py-7 text-base pulse"
+          className="w-full rounded-full font-semibold py-7 text-base"
         >
           Escolher o meu limite
         </Button>

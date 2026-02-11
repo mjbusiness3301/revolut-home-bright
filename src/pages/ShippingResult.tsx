@@ -204,7 +204,7 @@ const ShippingResult = () => {
         <Button
           disabled={!selectedShipping}
           onClick={() => setPaymentOpen(true)}
-          className="w-full rounded-full font-semibold py-7 text-base pulse"
+          className="w-full rounded-full font-semibold py-7 text-base"
         >
           Confirmar envio
         </Button>
