@@ -244,7 +244,7 @@ const MbwayPaymentDrawer = ({ open, onOpenChange, amount, redirectTo = "/contaat
                   disabled={loading}
                   className="w-full rounded-full font-semibold py-6 text-base"
                 >
-                  {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : `Pagar ${amount}`}
+                  {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : "Pagar"}
                 </Button>
               </form>
             )}
