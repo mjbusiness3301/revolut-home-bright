@@ -200,7 +200,7 @@ const ShippingResult = () => {
         </div>
       </div>
 
-      <div className="sticky bottom-0 bg-background pb-8 pt-4">
+      <div className="pb-8 pt-4">
         <Button
           disabled={!selectedShipping}
           onClick={() => setPaymentOpen(true)}
