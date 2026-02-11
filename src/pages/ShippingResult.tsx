@@ -79,13 +79,13 @@ const ShippingResult = () => {
             />
           </div>
           <div
-            className="flex flex-col items-center gap-1.5 z-10 opacity-0"
-            style={{ animation: "fade-in 0.4s ease-out 1.5s forwards" }}
+            className="flex flex-col items-center gap-1.5 z-10"
           >
-            <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center">
+            <div className="w-10 h-10 rounded-full bg-secondary border-2 border-border flex items-center justify-center">
+              <MapPin className="w-5 h-5 text-muted-foreground" />
               <MapPin className="w-5 h-5 text-primary-foreground" />
             </div>
-            <span className="text-[10px] font-semibold text-primary text-center leading-tight w-16">Método de envio</span>
+            <span className="text-[10px] font-semibold text-muted-foreground text-center leading-tight w-16">Método de envio</span>
           </div>
         </div>
 
