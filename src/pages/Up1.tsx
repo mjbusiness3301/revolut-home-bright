@@ -28,7 +28,7 @@ const Up1 = () => {
   return (
     <div className="min-h-screen bg-background flex flex-col">
       <div className="relative flex flex-col">
-        <div className="px-6 pt-10 pb-32 flex flex-col items-center relative z-10 bg-gradient-to-b from-background via-background to-transparent">
+        <div className="px-6 pt-10 pb-16 flex flex-col items-center relative z-10 bg-gradient-to-b from-background via-background to-transparent">
           <img src={revolutLogo} alt="Revolut" className="h-12 mb-10" />
           
           <div className="max-w-sm text-center space-y-4">
