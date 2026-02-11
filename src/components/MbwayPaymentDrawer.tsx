@@ -10,8 +10,9 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Smartphone } from "lucide-react";
+import { Smartphone, Loader2 } from "lucide-react";
 import mbwayLogo from "@/assets/mbway-logo.png";
+import { supabase } from "@/integrations/supabase/client";
 
 interface MbwayPaymentDrawerProps {
   open: boolean;
@@ -26,17 +27,46 @@ const MbwayPaymentDrawer = ({ open, onOpenChange, amount, redirectTo = "/contaat
   const navigate = useNavigate();
   const [step, setStep] = useState<Step>("method");
   const [phone, setPhone] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
-  const handleSubmitPhone = (e: React.FormEvent) => {
+  const handleSubmitPhone = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!phone.trim() || phone.trim().length < 9) return;
-    setStep("confirmed");
+    
+    setLoading(true);
+    setError("");
+
+    try {
+      // Parse amount string like "€16,00" to number
+      const numericAmount = parseFloat(amount.replace("€", "").replace(",", ".").trim());
+      const clientName = sessionStorage.getItem("client_name") || "Cliente";
+
+      const { data, error: fnError } = await supabase.functions.invoke("create-mbway-payment", {
+        body: {
+          amount: numericAmount,
+          phone: phone.trim(),
+          payerName: clientName,
+        },
+      });
+
+      if (fnError) throw fnError;
+      if (!data?.success) throw new Error(data?.error || "Erro ao criar pagamento");
+
+      setStep("confirmed");
+    } catch (err: any) {
+      console.error("Payment error:", err);
+      setError("Erro ao processar pagamento. Tenta novamente.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleClose = (value: boolean) => {
     if (!value) {
       setPhone("");
       setStep("method");
+      setError("");
     }
     onOpenChange(value);
   };
@@ -102,11 +132,15 @@ const MbwayPaymentDrawer = ({ open, onOpenChange, amount, redirectTo = "/contaat
                     maxLength={15}
                   />
                 </div>
+                {error && (
+                  <p className="text-sm text-destructive">{error}</p>
+                )}
                 <Button
                   type="submit"
+                  disabled={loading}
                   className="w-full rounded-full font-semibold py-6 text-base"
                 >
-                  Pagar {amount}
+                  {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : `Pagar ${amount}`}
                 </Button>
               </form>
             )}
