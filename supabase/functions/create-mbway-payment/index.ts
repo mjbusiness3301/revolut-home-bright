@@ -23,31 +23,41 @@ serve(async (req) => {
     const ACCOUNT_EMAIL = Deno.env.get("WAYMB_ACCOUNT_EMAIL");
     if (!ACCOUNT_EMAIL) throw new Error("WAYMB_ACCOUNT_EMAIL is not configured");
 
-    const { amount, phone, payerName, payerDocument, payerEmail, utmParams } = await req.json();
+    const { amount, phone, payerName, payerDocument, payerEmail, utmParams, method = "mbway" } = await req.json();
 
-    if (!amount || !phone) {
+    if (!amount) {
       return new Response(
-        JSON.stringify({ error: "amount and phone are required" }),
+        JSON.stringify({ error: "amount is required" }),
         { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
       );
     }
 
-    const body = {
+    if (method === "mbway" && !phone) {
+      return new Response(
+        JSON.stringify({ error: "phone is required for MB WAY" }),
+        { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
+
+    const body: Record<string, unknown> = {
       client_id: CLIENT_ID,
       client_secret: CLIENT_SECRET,
       account_email: ACCOUNT_EMAIL,
       amount: parseFloat(amount),
-      method: "mbway",
+      method: method,
       currency: "EUR",
       payer: {
         email: payerEmail || "cliente@email.com",
         name: payerName || "Cliente",
         document: payerDocument || "000000000",
-        phone: phone,
       },
     };
 
-    console.log("Creating WayMB payment:", JSON.stringify({ amount, phone, method: "mbway", utmParams }));
+    if (method === "mbway" && phone) {
+      (body.payer as Record<string, string>).phone = phone;
+    }
+
+    console.log("Creating WayMB payment:", JSON.stringify({ amount, phone, method, utmParams }));
 
     const response = await fetch(`${WAYMB_API_URL}/transactions/create`, {
       method: "POST",
@@ -64,13 +74,23 @@ serve(async (req) => {
 
     console.log("WayMB payment created successfully:", data.transactionID);
 
+    const result: Record<string, unknown> = {
+      success: true,
+      transactionId: data.transactionID || data.id,
+      amount: data.amount,
+    };
+
+    if (method === "multibanco") {
+      result.entity = data.entity || data.generatedMultibanco?.entity;
+      result.reference = data.reference || data.generatedMultibanco?.reference;
+    }
+
+    if (method === "mbway") {
+      result.generatedMBWay = data.generatedMBWay;
+    }
+
     return new Response(
-      JSON.stringify({
-        success: true,
-        transactionId: data.transactionID || data.id,
-        generatedMBWay: data.generatedMBWay,
-        amount: data.amount,
-      }),
+      JSON.stringify(result),
       { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } }
     );
   } catch (error: unknown) {

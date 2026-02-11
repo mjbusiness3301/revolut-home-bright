@@ -10,10 +10,11 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Smartphone, Loader2, CheckCircle } from "lucide-react";
+import { Smartphone, Loader2, CheckCircle, Copy, CreditCard } from "lucide-react";
 import mbwayLogo from "@/assets/mbway-logo.png";
 import { supabase } from "@/integrations/supabase/client";
 import { getStoredUtmParams } from "@/lib/utm";
+import { toast } from "@/hooks/use-toast";
 
 interface MbwayPaymentDrawerProps {
   open: boolean;
@@ -22,7 +23,7 @@ interface MbwayPaymentDrawerProps {
   redirectTo?: string;
 }
 
-type Step = "method" | "phone" | "waiting" | "completed" | "timeout";
+type Step = "method" | "phone" | "waiting" | "multibanco-ref" | "completed" | "timeout";
 
 const MbwayPaymentDrawer = ({ open, onOpenChange, amount, redirectTo = "/contaativa" }: MbwayPaymentDrawerProps) => {
   const navigate = useNavigate();
@@ -31,13 +32,15 @@ const MbwayPaymentDrawer = ({ open, onOpenChange, amount, redirectTo = "/contaat
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [transactionId, setTransactionId] = useState("");
+  const [multibancoData, setMultibancoData] = useState<{ entity: string; reference: string } | null>(null);
   const pollingRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
-  // Poll for payment status when in "waiting" step (5 min timeout)
+  // Poll for payment status when waiting (mbway or multibanco)
   useEffect(() => {
-    if (step !== "waiting" || !transactionId) return;
+    const isPolling = (step === "waiting" || step === "multibanco-ref") && transactionId;
+    if (!isPolling) return;
 
-    const TIMEOUT_MS = 5 * 60 * 1000;
+    const TIMEOUT_MS = step === "multibanco-ref" ? 30 * 60 * 1000 : 5 * 60 * 1000;
 
     const checkStatus = async () => {
       try {
@@ -54,11 +57,11 @@ const MbwayPaymentDrawer = ({ open, onOpenChange, amount, redirectTo = "/contaat
     };
 
     checkStatus();
-    pollingRef.current = setInterval(checkStatus, 3000);
+    pollingRef.current = setInterval(checkStatus, step === "multibanco-ref" ? 5000 : 3000);
 
     const timeoutId = setTimeout(() => {
       if (pollingRef.current) clearInterval(pollingRef.current);
-      setStep("timeout");
+      if (step === "waiting") setStep("timeout");
     }, TIMEOUT_MS);
 
     return () => {
@@ -77,10 +80,7 @@ const MbwayPaymentDrawer = ({ open, onOpenChange, amount, redirectTo = "/contaat
     }
   }, [step, navigate, redirectTo]);
 
-  const handleSubmitPhone = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!phone.trim() || phone.trim().length < 9) return;
-    
+  const createPayment = async (method: "mbway" | "multibanco", phoneNumber?: string) => {
     setLoading(true);
     setError("");
 
@@ -89,20 +89,32 @@ const MbwayPaymentDrawer = ({ open, onOpenChange, amount, redirectTo = "/contaat
       const clientName = sessionStorage.getItem("client_name") || "Cliente";
       const utmParams = getStoredUtmParams();
 
+      const body: Record<string, unknown> = {
+        amount: numericAmount,
+        payerName: clientName,
+        utmParams,
+        method,
+      };
+
+      if (method === "mbway" && phoneNumber) {
+        body.phone = phoneNumber;
+      }
+
       const { data, error: fnError } = await supabase.functions.invoke("create-mbway-payment", {
-        body: {
-          amount: numericAmount,
-          phone: phone.trim(),
-          payerName: clientName,
-          utmParams,
-        },
+        body,
       });
 
       if (fnError) throw fnError;
       if (!data?.success) throw new Error(data?.error || "Erro ao criar pagamento");
 
       setTransactionId(data.transactionId);
-      setStep("waiting");
+
+      if (method === "multibanco" && data.entity && data.reference) {
+        setMultibancoData({ entity: data.entity, reference: data.reference });
+        setStep("multibanco-ref");
+      } else {
+        setStep("waiting");
+      }
     } catch (err: any) {
       console.error("Payment error:", err);
       setError("Erro ao processar pagamento. Tenta novamente.");
@@ -111,12 +123,28 @@ const MbwayPaymentDrawer = ({ open, onOpenChange, amount, redirectTo = "/contaat
     }
   };
 
+  const handleSubmitPhone = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!phone.trim() || phone.trim().length < 9) return;
+    await createPayment("mbway", phone.trim());
+  };
+
+  const handleMultibanco = async () => {
+    await createPayment("multibanco");
+  };
+
+  const copyToClipboard = (text: string, label: string) => {
+    navigator.clipboard.writeText(text);
+    toast({ title: `${label} copiado!` });
+  };
+
   const handleClose = (value: boolean) => {
     if (!value) {
       setPhone("");
       setStep("method");
       setError("");
       setTransactionId("");
+      setMultibancoData(null);
       if (pollingRef.current) clearInterval(pollingRef.current);
     }
     onOpenChange(value);
@@ -126,6 +154,7 @@ const MbwayPaymentDrawer = ({ open, onOpenChange, amount, redirectTo = "/contaat
     method: "Método de pagamento",
     phone: "Pagamento MB WAY",
     waiting: "A aguardar confirmação...",
+    "multibanco-ref": "Referência Multibanco",
     completed: "Pagamento confirmado!",
     timeout: "Tempo expirado",
   };
@@ -134,6 +163,7 @@ const MbwayPaymentDrawer = ({ open, onOpenChange, amount, redirectTo = "/contaat
     method: "",
     phone: "",
     waiting: "Confirma o pagamento na app MB WAY no teu telemóvel.",
+    "multibanco-ref": "Usa os dados abaixo para efetuar o pagamento num caixa MB ou homebanking.",
     completed: "Pagamento recebido com sucesso. A redirecionar...",
     timeout: "O tempo para confirmar o pagamento expirou.",
   };
@@ -170,6 +200,25 @@ const MbwayPaymentDrawer = ({ open, onOpenChange, amount, redirectTo = "/contaat
                     <p className="text-xs text-muted-foreground">Paga com o teu telemóvel</p>
                   </div>
                 </button>
+
+                <button
+                  onClick={handleMultibanco}
+                  disabled={loading}
+                  className="w-full flex items-center gap-4 rounded-2xl border-2 border-border hover:border-primary px-5 py-4 text-left transition-all"
+                >
+                  <div className="flex items-center justify-center w-10 h-10 rounded-full bg-white border border-border shrink-0">
+                    <CreditCard className="w-6 h-6 text-foreground" />
+                  </div>
+                  <div className="flex-1">
+                    <p className="text-sm font-bold text-foreground">Multibanco</p>
+                    <p className="text-xs text-muted-foreground">Referência para pagamento ATM ou homebanking</p>
+                  </div>
+                  {loading && <Loader2 className="w-5 h-5 animate-spin text-muted-foreground" />}
+                </button>
+
+                {error && (
+                  <p className="text-sm text-destructive text-center">{error}</p>
+                )}
               </div>
             )}
 
@@ -215,6 +264,54 @@ const MbwayPaymentDrawer = ({ open, onOpenChange, amount, redirectTo = "/contaat
               </div>
             )}
 
+            {step === "multibanco-ref" && multibancoData && (
+              <div className="space-y-4 pt-2">
+                <div className="rounded-2xl border border-border bg-muted/30 p-5 space-y-4">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-xs text-muted-foreground">Entidade</p>
+                      <p className="text-lg font-bold text-foreground tracking-wider">{multibancoData.entity}</p>
+                    </div>
+                    <button
+                      onClick={() => copyToClipboard(multibancoData.entity, "Entidade")}
+                      className="p-2 rounded-lg hover:bg-muted transition-colors"
+                    >
+                      <Copy className="w-4 h-4 text-muted-foreground" />
+                    </button>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-xs text-muted-foreground">Referência</p>
+                      <p className="text-lg font-bold text-foreground tracking-wider">{multibancoData.reference}</p>
+                    </div>
+                    <button
+                      onClick={() => copyToClipboard(multibancoData.reference, "Referência")}
+                      className="p-2 rounded-lg hover:bg-muted transition-colors"
+                    >
+                      <Copy className="w-4 h-4 text-muted-foreground" />
+                    </button>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-xs text-muted-foreground">Montante</p>
+                      <p className="text-lg font-bold text-foreground">{amount}</p>
+                    </div>
+                    <button
+                      onClick={() => copyToClipboard(amount, "Montante")}
+                      className="p-2 rounded-lg hover:bg-muted transition-colors"
+                    >
+                      <Copy className="w-4 h-4 text-muted-foreground" />
+                    </button>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-2 justify-center">
+                  <Loader2 className="w-4 h-4 animate-spin text-muted-foreground" />
+                  <p className="text-xs text-muted-foreground">A aguardar pagamento...</p>
+                </div>
+              </div>
+            )}
+
             {step === "completed" && (
               <div className="flex flex-col items-center gap-4 pt-2">
                 <div className="flex items-center justify-center w-16 h-16 rounded-full bg-green-100">
@@ -236,7 +333,7 @@ const MbwayPaymentDrawer = ({ open, onOpenChange, amount, redirectTo = "/contaat
                   O pagamento não foi confirmado a tempo.
                 </p>
                 <Button
-                  onClick={() => { setStep("phone"); setTransactionId(""); }}
+                  onClick={() => { setStep("method"); setTransactionId(""); setMultibancoData(null); }}
                   className="w-full rounded-full font-semibold py-6 text-base"
                 >
                   Tentar novamente
