@@ -27,7 +27,7 @@ const Up1 = () => {
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
-    <div className="relative flex flex-col min-h-[80vh]">
+    <div className="relative flex flex-col min-h-[90vh]">
         <video
           className="absolute inset-0 w-full h-full object-cover top-32"
           autoPlay
