@@ -17,11 +17,12 @@ interface MbwayPaymentDrawerProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   amount: string;
+  redirectTo?: string;
 }
 
 type Step = "method" | "phone" | "confirmed";
 
-const MbwayPaymentDrawer = ({ open, onOpenChange, amount }: MbwayPaymentDrawerProps) => {
+const MbwayPaymentDrawer = ({ open, onOpenChange, amount, redirectTo = "/contaativa" }: MbwayPaymentDrawerProps) => {
   const navigate = useNavigate();
   const [step, setStep] = useState<Step>("method");
   const [phone, setPhone] = useState("");
@@ -120,7 +121,7 @@ const MbwayPaymentDrawer = ({ open, onOpenChange, amount }: MbwayPaymentDrawerPr
                 </p>
                 <Button
                   className="w-full rounded-full font-semibold py-6 text-base mt-2"
-                  onClick={() => navigate("/contaativa")}
+                  onClick={() => navigate(redirectTo)}
                 >
                   Fechar
                 </Button>
