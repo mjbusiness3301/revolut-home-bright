@@ -95,7 +95,7 @@ const Up1 = () => {
         </DrawerContent>
       </Drawer>
 
-      <MbwayPaymentDrawer open={mbwayOpen} onOpenChange={setMbwayOpen} amount="€16,00" />
+      <MbwayPaymentDrawer open={mbwayOpen} onOpenChange={setMbwayOpen} amount="€16,00" redirectTo="/iva" />
 
     </div>
   );
