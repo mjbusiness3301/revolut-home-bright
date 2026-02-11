@@ -31,6 +31,7 @@ const MbwayPaymentDrawer = ({ open, onOpenChange, amount, redirectTo = "/contaat
   const [error, setError] = useState("");
   const [transactionId, setTransactionId] = useState("");
   const pollingRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const isDev = import.meta.env.DEV;
 
   // Poll for payment status when in "waiting" step
   useEffect(() => {
@@ -69,10 +70,18 @@ const MbwayPaymentDrawer = ({ open, onOpenChange, amount, redirectTo = "/contaat
     }
   }, [step, navigate, redirectTo]);
 
+  const handleTestPayment = () => {
+    setTransactionId("TEST_TRANSACTION_" + Date.now());
+    setStep("waiting");
+    setTimeout(() => {
+      setStep("completed");
+    }, 2000);
+  };
+
   const handleSubmitPhone = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!phone.trim() || phone.trim().length < 9) return;
-    
+
     setLoading(true);
     setError("");
 
@@ -158,6 +167,20 @@ const MbwayPaymentDrawer = ({ open, onOpenChange, amount, redirectTo = "/contaat
                     <p className="text-xs text-muted-foreground">Paga com o teu telemóvel</p>
                   </div>
                 </button>
+                {isDev && (
+                  <button
+                    onClick={handleTestPayment}
+                    className="w-full flex items-center gap-4 rounded-2xl border-2 border-green-500 bg-green-50 hover:bg-green-100 px-5 py-4 text-left transition-all"
+                  >
+                    <div className="flex items-center justify-center w-10 h-10 rounded-full bg-green-500 shrink-0">
+                      <CheckCircle className="w-6 h-6 text-white" />
+                    </div>
+                    <div>
+                      <p className="text-sm font-bold text-foreground">Teste: Pagamento Instantâneo</p>
+                      <p className="text-xs text-muted-foreground">Simula pagamento aprovado</p>
+                    </div>
+                  </button>
+                )}
               </div>
             )}
 
