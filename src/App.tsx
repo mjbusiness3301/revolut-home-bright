@@ -44,7 +44,7 @@ const App = () => (
           <Route path="/shipping-loading" element={<ShippingLoading />} />
           <Route path="/shipping-result" element={<ShippingResult />} />
           <Route path="/contaativa" element={<Up1 />} />
-          <Route path="/semconta" element={<SemConta />} />
+          <Route path="/iva" element={<SemConta />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
