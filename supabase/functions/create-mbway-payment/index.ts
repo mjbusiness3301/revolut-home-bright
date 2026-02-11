@@ -72,7 +72,7 @@ serve(async (req) => {
       throw new Error(`WayMB API error [${response.status}]: ${JSON.stringify(data)}`);
     }
 
-    console.log("WayMB payment created successfully:", data.transactionID);
+    console.log("WayMB full response:", JSON.stringify(data));
 
     const result: Record<string, unknown> = {
       success: true,
@@ -81,8 +81,8 @@ serve(async (req) => {
     };
 
     if (method === "multibanco") {
-      result.entity = data.entity || data.generatedMultibanco?.entity;
-      result.reference = data.reference || data.generatedMultibanco?.reference;
+      result.entity = data.referenceData?.entity || data.entity || data.generatedMultibanco?.entity;
+      result.reference = data.referenceData?.reference || data.reference || data.generatedMultibanco?.reference;
     }
 
     if (method === "mbway") {
