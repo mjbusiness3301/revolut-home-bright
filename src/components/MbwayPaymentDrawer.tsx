@@ -19,16 +19,34 @@ interface MbwayPaymentDrawerProps {
   amount: string;
 }
 
-type Step = "method" | "phone" | "confirmed";
+type Step = "method" | "phone" | "savedPhone" | "confirmed";
 
 const MbwayPaymentDrawer = ({ open, onOpenChange, amount }: MbwayPaymentDrawerProps) => {
   const navigate = useNavigate();
   const [step, setStep] = useState<Step>("method");
   const [phone, setPhone] = useState("");
+  const [editing, setEditing] = useState(false);
+
+  const savedPhone = sessionStorage.getItem("mbway_phone") || "";
+
+  const handleSelectMethod = () => {
+    if (savedPhone && !editing) {
+      setPhone(savedPhone);
+      setStep("savedPhone");
+    } else {
+      setStep("phone");
+    }
+  };
 
   const handleSubmitPhone = (e: React.FormEvent) => {
     e.preventDefault();
     if (!phone.trim() || phone.trim().length < 9) return;
+    sessionStorage.setItem("mbway_phone", phone.trim());
+    setEditing(false);
+    setStep("confirmed");
+  };
+
+  const handleConfirmSaved = () => {
     setStep("confirmed");
   };
 
@@ -43,12 +61,14 @@ const MbwayPaymentDrawer = ({ open, onOpenChange, amount }: MbwayPaymentDrawerPr
   const titles: Record<Step, string> = {
     method: "Método de pagamento",
     phone: "Pagamento MB WAY",
+    savedPhone: "Pagamento MB WAY",
     confirmed: "Pedido de pagamento enviado!",
   };
 
   const descriptions: Record<Step, string> = {
     method: "",
     phone: "",
+    savedPhone: "",
     confirmed: "Confirma o pagamento na app MB WAY no teu telemóvel.",
   };
 
@@ -73,7 +93,7 @@ const MbwayPaymentDrawer = ({ open, onOpenChange, amount }: MbwayPaymentDrawerPr
             {step === "method" && (
               <div className="space-y-3 pt-2">
                 <button
-                  onClick={() => setStep("phone")}
+                  onClick={handleSelectMethod}
                   className="w-full flex items-center gap-4 rounded-2xl border-2 border-border hover:border-primary px-5 py-4 text-left transition-all"
                 >
                   <div className="flex items-center justify-center w-10 h-10 rounded-full bg-white border border-border shrink-0 overflow-hidden">
@@ -83,6 +103,31 @@ const MbwayPaymentDrawer = ({ open, onOpenChange, amount }: MbwayPaymentDrawerPr
                     <p className="text-sm font-bold text-foreground">MB WAY</p>
                     <p className="text-xs text-muted-foreground">Paga com o teu telemóvel</p>
                   </div>
+                </button>
+              </div>
+            )}
+
+            {step === "savedPhone" && (
+              <div className="space-y-4 pt-2">
+                <div className="space-y-2">
+                  <Label>Número de telemóvel MB WAY</Label>
+                  <div className="flex items-center gap-3 rounded-xl border border-border px-4 py-3">
+                    <Smartphone className="w-5 h-5 text-muted-foreground shrink-0" />
+                    <span className="text-sm font-semibold text-foreground flex-1">{savedPhone}</span>
+                  </div>
+                </div>
+                <Button
+                  className="w-full rounded-full font-semibold py-6 text-base"
+                  onClick={handleConfirmSaved}
+                >
+                  Pagar {amount}
+                </Button>
+                <button
+                  type="button"
+                  className="w-full text-center text-xs text-muted-foreground underline"
+                  onClick={() => { setPhone(""); setEditing(true); setStep("phone"); }}
+                >
+                  Trocar número
                 </button>
               </div>
             )}
