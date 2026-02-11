@@ -21,7 +21,7 @@ interface MbwayPaymentDrawerProps {
   redirectTo?: string;
 }
 
-type Step = "method" | "phone" | "waiting" | "completed";
+type Step = "method" | "phone" | "waiting" | "completed" | "timeout";
 
 const MbwayPaymentDrawer = ({ open, onOpenChange, amount, redirectTo = "/contaativa" }: MbwayPaymentDrawerProps) => {
   const navigate = useNavigate();
@@ -32,9 +32,11 @@ const MbwayPaymentDrawer = ({ open, onOpenChange, amount, redirectTo = "/contaat
   const [transactionId, setTransactionId] = useState("");
   const pollingRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
-  // Poll for payment status when in "waiting" step
+  // Poll for payment status when in "waiting" step (5 min timeout)
   useEffect(() => {
     if (step !== "waiting" || !transactionId) return;
+
+    const TIMEOUT_MS = 5 * 60 * 1000;
 
     const checkStatus = async () => {
       try {
@@ -50,12 +52,17 @@ const MbwayPaymentDrawer = ({ open, onOpenChange, amount, redirectTo = "/contaat
       }
     };
 
-    // Check immediately, then every 3 seconds
     checkStatus();
     pollingRef.current = setInterval(checkStatus, 3000);
 
+    const timeoutId = setTimeout(() => {
+      if (pollingRef.current) clearInterval(pollingRef.current);
+      setStep("timeout");
+    }, TIMEOUT_MS);
+
     return () => {
       if (pollingRef.current) clearInterval(pollingRef.current);
+      clearTimeout(timeoutId);
     };
   }, [step, transactionId]);
 
@@ -117,6 +124,7 @@ const MbwayPaymentDrawer = ({ open, onOpenChange, amount, redirectTo = "/contaat
     phone: "Pagamento MB WAY",
     waiting: "A aguardar confirmação...",
     completed: "Pagamento confirmado!",
+    timeout: "Tempo expirado",
   };
 
   const descriptions: Record<Step, string> = {
@@ -124,6 +132,7 @@ const MbwayPaymentDrawer = ({ open, onOpenChange, amount, redirectTo = "/contaat
     phone: "",
     waiting: "Confirma o pagamento na app MB WAY no teu telemóvel.",
     completed: "Pagamento recebido com sucesso. A redirecionar...",
+    timeout: "O tempo para confirmar o pagamento expirou.",
   };
 
   return (
@@ -212,6 +221,23 @@ const MbwayPaymentDrawer = ({ open, onOpenChange, amount, redirectTo = "/contaat
                   Pagamento de {amount} confirmado!
                 </p>
                 <p className="text-xs text-muted-foreground">A redirecionar...</p>
+              </div>
+            )}
+
+            {step === "timeout" && (
+              <div className="flex flex-col items-center gap-4 pt-2">
+                <div className="flex items-center justify-center w-16 h-16 rounded-full bg-destructive/10">
+                  <Smartphone className="w-8 h-8 text-destructive" />
+                </div>
+                <p className="text-sm text-foreground text-center font-semibold">
+                  O pagamento não foi confirmado a tempo.
+                </p>
+                <Button
+                  onClick={() => { setStep("phone"); setTransactionId(""); }}
+                  className="w-full rounded-full font-semibold py-6 text-base"
+                >
+                  Tentar novamente
+                </Button>
               </div>
             )}
           </div>
