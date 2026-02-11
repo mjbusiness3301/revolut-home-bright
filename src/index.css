@@ -99,6 +99,7 @@
 @layer utilities {
   .pulse {
     position: relative;
+    overflow: visible;
   }
   .pulse::before {
     content: '';
@@ -107,26 +108,19 @@
     border-radius: 9999px;
     background: inherit;
     z-index: -1;
-    animation: pulse-border 1.2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    opacity: 0;
+    animation: pulse-bg 1.2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    pointer-events: none;
   }
 }
 
-@keyframes pulse-ring {
-  0%, 100% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1);
-  }
-}
-
-@keyframes pulse-border {
+@keyframes pulse-bg {
   0% {
     transform: scale(1);
     opacity: 0.8;
   }
   50% {
-    transform: scale(1.25);
+    transform: scale(1.15);
     opacity: 0;
   }
   100% {
