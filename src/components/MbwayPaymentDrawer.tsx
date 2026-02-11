@@ -15,6 +15,7 @@ import mbwayLogo from "@/assets/mbway-logo.png";
 import { supabase } from "@/integrations/supabase/client";
 import { getStoredUtmParams } from "@/lib/utm";
 import { toast } from "@/hooks/use-toast";
+import { trackPixelEvent } from "@/lib/meta-pixel";
 
 interface MbwayPaymentDrawerProps {
   open: boolean;
@@ -50,6 +51,7 @@ const MbwayPaymentDrawer = ({ open, onOpenChange, amount, redirectTo = "/contaat
         if (data?.status === "COMPLETED") {
           setStep("completed");
           if (pollingRef.current) clearInterval(pollingRef.current);
+          trackPixelEvent("Purchase", { value: parseFloat(amount.replace("€", "").replace(",", ".").trim()), currency: "EUR" });
         }
       } catch (err) {
         console.error("Status check error:", err);

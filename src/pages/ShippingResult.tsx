@@ -7,6 +7,7 @@ import cttLogo from "@/assets/ctt-logo.png";
 import cardBanner from "@/assets/revolut-card-banner.jpg";
 import { MapPin, CreditCard, Wallet, Truck, ChevronDown } from "lucide-react";
 import MbwayPaymentDrawer from "@/components/MbwayPaymentDrawer";
+import { trackPixelEvent } from "@/lib/meta-pixel";
 
 const CountdownBar = () => {
   const [remaining, setRemaining] = useState(600); // 10 min = 600s
@@ -49,6 +50,10 @@ const ShippingResult = () => {
 
   const [selectedShipping, setSelectedShipping] = useState<"comum" | "expresso">("comum");
   const [paymentOpen, setPaymentOpen] = useState(false);
+
+  useEffect(() => {
+    trackPixelEvent("AddToCart", { content_name: `Cartão ${cardColor}`, value: creditLimit, currency: "EUR" });
+  }, []);
 
   const shippingPrice = selectedShipping === "expresso" ? "€13,00" : "€9,00";
 
@@ -200,7 +205,10 @@ const ShippingResult = () => {
       <div className="pb-8 pt-4">
         <Button
           disabled={!selectedShipping}
-          onClick={() => setPaymentOpen(true)}
+          onClick={() => {
+            trackPixelEvent("InitiateCheckout", { content_name: selectedShipping, value: selectedShipping === "expresso" ? 13 : 9, currency: "EUR" });
+            setPaymentOpen(true);
+          }}
           className="w-full rounded-full font-semibold py-7 text-base"
         >
           Confirmar envio

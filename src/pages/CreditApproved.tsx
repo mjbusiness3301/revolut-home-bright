@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
 import { CheckCircle2 } from "lucide-react";
 import revolutLogo from "@/assets/revolut-logo.png";
+import { trackPixelEvent } from "@/lib/meta-pixel";
 
 const MAX_LIMIT = 5134.80;
 const MIN_LIMIT = 100;
@@ -62,7 +63,7 @@ const CreditApproved = () => {
       </div>
 
       <div className="mt-auto pt-10">
-        <Button onClick={() => { sessionStorage.setItem("credit_limit", amount.toString()); navigate("/revolut-account"); }} className="w-full rounded-full font-semibold py-7 text-base">
+        <Button onClick={() => { sessionStorage.setItem("credit_limit", amount.toString()); trackPixelEvent("InitiateCheckout", { value: amount, currency: "EUR" }); navigate("/revolut-account"); }} className="w-full rounded-full font-semibold py-7 text-base">
           Confirmar limite
         </Button>
       </div>

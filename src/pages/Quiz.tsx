@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import revolutLogo from "@/assets/revolut-logo.png";
+import { trackPixelEvent } from "@/lib/meta-pixel";
 
 const questions = [
   {
@@ -57,6 +58,7 @@ const Quiz = () => {
     if (step < questions.length - 1) {
       setStep(step + 1);
     } else {
+      trackPixelEvent("CompleteRegistration");
       navigate("/quiz-result");
     }
   };
