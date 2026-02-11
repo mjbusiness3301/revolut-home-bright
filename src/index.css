@@ -99,7 +99,7 @@
 @layer utilities {
   .pulse {
     position: relative;
-    overflow: visible;
+    isolation: isolate;
   }
   .pulse::before {
     content: '';
