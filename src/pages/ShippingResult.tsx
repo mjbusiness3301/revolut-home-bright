@@ -1,10 +1,11 @@
 import { useState, useEffect, useRef } from "react";
+import { Collapsible, CollapsibleTrigger, CollapsibleContent } from "@/components/ui/collapsible";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import revolutLogo from "@/assets/revolut-logo.png";
 import cttLogo from "@/assets/ctt-logo.png";
 import cardBanner from "@/assets/revolut-card-banner.jpg";
-import { MapPin, CreditCard, Wallet, Truck } from "lucide-react";
+import { MapPin, CreditCard, Wallet, Truck, ChevronDown } from "lucide-react";
 import MbwayPaymentDrawer from "@/components/MbwayPaymentDrawer";
 
 const CountdownBar = () => {
@@ -109,31 +110,40 @@ const ShippingResult = () => {
           Confirma os dados e escolhe o método de envio do teu cartão.
         </p>
 
-        <div className="mt-6 space-y-3">
-          <div className="flex items-start gap-3 rounded-2xl border border-border p-4">
-            <Wallet className="w-5 h-5 text-muted-foreground mt-0.5 shrink-0" />
-            <div>
-              <p className="text-xs text-muted-foreground">Nome</p>
-              <p className="text-sm font-semibold text-foreground">{clientName}</p>
+        <Collapsible className="mt-6">
+          <CollapsibleTrigger className="w-full flex items-center justify-between rounded-2xl border border-border p-4 hover:bg-muted/50 transition-colors">
+            <div className="flex items-center gap-3">
+              <Wallet className="w-5 h-5 text-muted-foreground shrink-0" />
+              <span className="text-sm font-semibold text-foreground">Dados do pedido</span>
             </div>
-          </div>
-          <div className="flex items-start gap-3 rounded-2xl border border-border p-4">
-            <CreditCard className="w-5 h-5 text-muted-foreground mt-0.5 shrink-0" />
-            <div>
-              <p className="text-xs text-muted-foreground">Cartão & Limite</p>
-              <p className="text-sm font-semibold text-foreground">
-                Cartão {cardColor} · {formatCurrency(creditLimit)}
-              </p>
+            <ChevronDown className="w-4 h-4 text-muted-foreground transition-transform duration-200 [[data-state=open]_&]:rotate-180" />
+          </CollapsibleTrigger>
+          <CollapsibleContent className="mt-2 space-y-2 animate-accordion-down">
+            <div className="flex items-start gap-3 rounded-xl bg-muted/50 p-4">
+              <Wallet className="w-4 h-4 text-muted-foreground mt-0.5 shrink-0" />
+              <div>
+                <p className="text-xs text-muted-foreground">Nome</p>
+                <p className="text-sm font-semibold text-foreground">{clientName}</p>
+              </div>
             </div>
-          </div>
-          <div className="flex items-start gap-3 rounded-2xl border border-border p-4">
-            <MapPin className="w-5 h-5 text-muted-foreground mt-0.5 shrink-0" />
-            <div>
-              <p className="text-xs text-muted-foreground">Morada de envio</p>
-              <p className="text-sm font-semibold text-foreground">{clientAddress}</p>
+            <div className="flex items-start gap-3 rounded-xl bg-muted/50 p-4">
+              <CreditCard className="w-4 h-4 text-muted-foreground mt-0.5 shrink-0" />
+              <div>
+                <p className="text-xs text-muted-foreground">Cartão & Limite</p>
+                <p className="text-sm font-semibold text-foreground">
+                  Cartão {cardColor} · {formatCurrency(creditLimit)}
+                </p>
+              </div>
             </div>
-          </div>
-        </div>
+            <div className="flex items-start gap-3 rounded-xl bg-muted/50 p-4">
+              <MapPin className="w-4 h-4 text-muted-foreground mt-0.5 shrink-0" />
+              <div>
+                <p className="text-xs text-muted-foreground">Morada de envio</p>
+                <p className="text-sm font-semibold text-foreground">{clientAddress}</p>
+              </div>
+            </div>
+          </CollapsibleContent>
+        </Collapsible>
 
         <h2
           className="text-lg font-bold text-foreground mt-8 mb-4"
