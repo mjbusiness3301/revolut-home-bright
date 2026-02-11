@@ -27,10 +27,10 @@ const Up1 = () => {
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
-      <div className="flex-1 flex flex-col items-center px-6 py-10 mb-96">
-        <img src={revolutLogo} alt="Revolut" className="h-12 mb-10" />
+      <div className="relative flex flex-col items-center px-6 py-10">
+        <img src={revolutLogo} alt="Revolut" className="h-12 mb-10 relative z-10" />
         
-        <div className="max-w-sm text-center space-y-4">
+        <div className="max-w-sm text-center space-y-4 relative z-10">
           <div className="flex justify-center mb-2">
             <AlertTriangle className="h-10 w-10 text-yellow-500 animate-[pulse_1.5s_ease-in-out_infinite]" />
           </div>
@@ -52,17 +52,18 @@ const Up1 = () => {
             Fazer upgrade agora
           </Button>
         </div>
-      </div>
 
-      <div className="px-6 mb-10">
-        <video
-          className="w-full rounded-2xl"
-          autoPlay
-          muted
-          playsInline
-        >
-          <source src={revolutPlusVideo} type="video/mp4" />
-        </video>
+        <div className="w-full mt-8 -mb-20">
+          <video
+            className="w-full rounded-2xl"
+            autoPlay
+            muted
+            playsInline
+            loop
+          >
+            <source src={revolutPlusVideo} type="video/mp4" />
+          </video>
+        </div>
       </div>
 
       <Drawer open={drawerOpen} onOpenChange={setDrawerOpen}>
