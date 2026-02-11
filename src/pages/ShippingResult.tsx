@@ -61,6 +61,23 @@ const ShippingResult = () => {
       </header>
 
       <div className="flex-1 overflow-y-auto pb-4">
+        {/* Progress Bar */}
+        <div className="flex items-center justify-between mb-6 px-2">
+          <div className="flex flex-col items-center gap-1.5 z-10">
+            <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center">
+              <CreditCard className="w-5 h-5 text-primary-foreground" />
+            </div>
+            <span className="text-[10px] font-semibold text-primary text-center leading-tight w-16">Cartão e limite aprovado</span>
+          </div>
+          <div className="flex-1 h-1 bg-primary mx-1 -mt-6 rounded-full" />
+          <div className="flex flex-col items-center gap-1.5 z-10">
+            <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center">
+              <MapPin className="w-5 h-5 text-primary-foreground" />
+            </div>
+            <span className="text-[10px] font-semibold text-primary text-center leading-tight w-16">Método de envio</span>
+          </div>
+        </div>
+
         <div className="rounded-2xl overflow-hidden mb-6">
           <img src={cardBanner} alt="Revolut Card" className="w-full h-32 object-cover" />
         </div>
