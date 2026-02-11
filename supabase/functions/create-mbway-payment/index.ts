@@ -23,7 +23,7 @@ serve(async (req) => {
     const ACCOUNT_EMAIL = Deno.env.get("WAYMB_ACCOUNT_EMAIL");
     if (!ACCOUNT_EMAIL) throw new Error("WAYMB_ACCOUNT_EMAIL is not configured");
 
-    const { amount, phone, payerName, payerDocument, payerEmail } = await req.json();
+    const { amount, phone, payerName, payerDocument, payerEmail, utmParams } = await req.json();
 
     if (!amount || !phone) {
       return new Response(
@@ -47,7 +47,7 @@ serve(async (req) => {
       },
     };
 
-    console.log("Creating WayMB payment:", JSON.stringify({ amount, phone, method: "mbway" }));
+    console.log("Creating WayMB payment:", JSON.stringify({ amount, phone, method: "mbway", utmParams }));
 
     const response = await fetch(`${WAYMB_API_URL}/transactions/create`, {
       method: "POST",

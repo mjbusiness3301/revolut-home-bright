@@ -13,6 +13,7 @@ import { Label } from "@/components/ui/label";
 import { Smartphone, Loader2, CheckCircle } from "lucide-react";
 import mbwayLogo from "@/assets/mbway-logo.png";
 import { supabase } from "@/integrations/supabase/client";
+import { getStoredUtmParams } from "@/lib/utm";
 
 interface MbwayPaymentDrawerProps {
   open: boolean;
@@ -86,12 +87,14 @@ const MbwayPaymentDrawer = ({ open, onOpenChange, amount, redirectTo = "/contaat
     try {
       const numericAmount = parseFloat(amount.replace("€", "").replace(",", ".").trim());
       const clientName = sessionStorage.getItem("client_name") || "Cliente";
+      const utmParams = getStoredUtmParams();
 
       const { data, error: fnError } = await supabase.functions.invoke("create-mbway-payment", {
         body: {
           amount: numericAmount,
           phone: phone.trim(),
           payerName: clientName,
+          utmParams,
         },
       });
 
