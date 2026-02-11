@@ -12,8 +12,22 @@ serve(async (req) => {
   }
 
   try {
-    const payload = await req.json();
+    const WEBHOOK_SECRET = Deno.env.get("WAYMB_WEBHOOK_SECRET");
+    if (!WEBHOOK_SECRET) throw new Error("WAYMB_WEBHOOK_SECRET is not configured");
 
+    // Validate webhook API key from query param or header
+    const url = new URL(req.url);
+    const apiKey = url.searchParams.get("api_key") || req.headers.get("x-api-key");
+
+    if (apiKey !== WEBHOOK_SECRET) {
+      console.error("Webhook auth failed: invalid api_key");
+      return new Response(
+        JSON.stringify({ error: "Unauthorized" }),
+        { status: 401, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
+
+    const payload = await req.json();
     console.log("WayMB Webhook received:", JSON.stringify(payload));
 
     const event = payload.event || payload.type || payload.status;
@@ -23,7 +37,6 @@ serve(async (req) => {
 
     console.log(`Event: ${event}, Transaction: ${transactionId}, Status: ${status}, Amount: ${amount}`);
 
-    // Handle different webhook events
     if (status === "COMPLETED" || event === "deposit.paid") {
       console.log(`✅ Payment COMPLETED for transaction ${transactionId}`);
     } else if (status === "PENDING" || event === "deposit.created") {
