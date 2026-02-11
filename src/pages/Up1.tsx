@@ -1,6 +1,6 @@
 import { useState } from "react";
 import revolutLogo from "@/assets/revolut-logo.png";
-import revolutPlusVideo from "@/assets/revolut-plus-video-2.mp4";
+import revolutPlusVideo from "@/assets/contas-conjuntas.mp4";
 import { AlertTriangle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
