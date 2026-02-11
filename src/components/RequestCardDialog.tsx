@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { trackPixelEvent } from "@/lib/meta-pixel";
 import {
   Drawer,
   DrawerContent,
@@ -26,6 +27,7 @@ const RequestCardDialog = ({ open, onOpenChange }: RequestCardDialogProps) => {
     e.preventDefault();
     if (!name.trim() || !nif.trim()) return;
     sessionStorage.setItem("client_name", name.trim());
+    trackPixelEvent("Lead");
     onOpenChange(false);
     navigate("/quiz-loading");
   };
