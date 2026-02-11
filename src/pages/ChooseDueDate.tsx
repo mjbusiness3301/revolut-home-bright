@@ -57,7 +57,7 @@ const ChooseDueDate = () => {
         <Button
           disabled={!selected}
           onClick={() => navigate("/address")}
-          className="w-full rounded-full font-semibold py-7 text-base pulse"
+          className="w-full rounded-full font-semibold py-7 text-base"
         >
           Confirmar data
         </Button>

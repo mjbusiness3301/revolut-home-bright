@@ -77,7 +77,7 @@ const AddressPage = () => {
         <Button
           disabled={!canProceed}
           onClick={() => { sessionStorage.setItem("client_address", `${address}, ${postalCode}, ${city}`); navigate("/shipping-loading"); }}
-          className="w-full rounded-full font-semibold py-7 text-base pulse"
+          className="w-full rounded-full font-semibold py-7 text-base"
         >
           Continuar
         </Button>

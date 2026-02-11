@@ -57,7 +57,7 @@ const Up1 = () => {
             </p>
 
             <Button
-              className="w-full rounded-full text-sm font-semibold mt-6 pulse"
+              className="w-full rounded-full text-sm font-semibold mt-6"
               size="lg"
               onClick={() => setDrawerOpen(true)}
             >
@@ -86,7 +86,7 @@ const Up1 = () => {
             </div>
 
             <Button
-              className="w-full rounded-full font-semibold py-6 text-base pulse"
+              className="w-full rounded-full font-semibold py-6 text-base"
               onClick={() => { setDrawerOpen(false); setMbwayOpen(true); }}
             >
               Pagar agora
