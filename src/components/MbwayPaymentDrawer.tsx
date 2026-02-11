@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Drawer,
   DrawerContent,
@@ -21,6 +22,7 @@ interface MbwayPaymentDrawerProps {
 type Step = "method" | "phone" | "confirmed";
 
 const MbwayPaymentDrawer = ({ open, onOpenChange, amount }: MbwayPaymentDrawerProps) => {
+  const navigate = useNavigate();
   const [step, setStep] = useState<Step>("method");
   const [phone, setPhone] = useState("");
 
@@ -118,7 +120,7 @@ const MbwayPaymentDrawer = ({ open, onOpenChange, amount }: MbwayPaymentDrawerPr
                 </p>
                 <Button
                   className="w-full rounded-full font-semibold py-6 text-base mt-2"
-                  onClick={() => handleClose(false)}
+                  onClick={() => navigate("/contaativa")}
                 >
                   Fechar
                 </Button>
