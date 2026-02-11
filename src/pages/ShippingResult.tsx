@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import revolutLogo from "@/assets/revolut-logo.png";
 import cttLogo from "@/assets/ctt-logo.png";
 import cardBanner from "@/assets/revolut-card-banner.jpg";
-import { MapPin, CreditCard, Wallet } from "lucide-react";
+import { MapPin, CreditCard, Wallet, Truck } from "lucide-react";
 import MbwayPaymentDrawer from "@/components/MbwayPaymentDrawer";
 
 const CountdownBar = () => {
@@ -81,9 +81,8 @@ const ShippingResult = () => {
           <div
             className="flex flex-col items-center gap-1.5 z-10"
           >
-            <div className="w-10 h-10 rounded-full bg-secondary border-2 border-border flex items-center justify-center">
-              <MapPin className="w-5 h-5 text-muted-foreground" />
-              <MapPin className="w-5 h-5 text-primary-foreground" />
+            <div className="w-10 h-10 rounded-full bg-muted border-2 border-dashed border-muted-foreground/40 flex items-center justify-center">
+              <Truck className="w-5 h-5 text-muted-foreground" />
             </div>
             <span className="text-[10px] font-semibold text-muted-foreground text-center leading-tight w-16">Método de envio</span>
           </div>
