@@ -1,1 +1,4 @@
 project_id = "tzvpvfbrwdbwynhhxkqw"
+
+[functions.create-mbway-payment]
+verify_jwt = false
