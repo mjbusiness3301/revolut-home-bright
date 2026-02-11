@@ -12,6 +12,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Smartphone, Loader2, CheckCircle, Copy, CreditCard } from "lucide-react";
 import mbwayLogo from "@/assets/mbway-logo.png";
+import multibancoLogo from "@/assets/multibanco-logo.jpg";
 import { supabase } from "@/integrations/supabase/client";
 import { getStoredUtmParams } from "@/lib/utm";
 import { toast } from "@/hooks/use-toast";
@@ -208,8 +209,8 @@ const MbwayPaymentDrawer = ({ open, onOpenChange, amount, redirectTo = "/contaat
                   disabled={loading}
                   className="w-full flex items-center gap-4 rounded-2xl border-2 border-border hover:border-primary px-5 py-4 text-left transition-all"
                 >
-                  <div className="flex items-center justify-center w-10 h-10 rounded-full bg-white border border-border shrink-0">
-                    <CreditCard className="w-6 h-6 text-foreground" />
+                  <div className="flex items-center justify-center w-10 h-10 rounded-full bg-white border border-border shrink-0 overflow-hidden">
+                    <img src={multibancoLogo} alt="Multibanco" className="w-7 h-7 object-contain" />
                   </div>
                   <div className="flex-1">
                     <p className="text-sm font-bold text-foreground">Multibanco</p>
