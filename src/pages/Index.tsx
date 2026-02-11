@@ -67,7 +67,7 @@ const Index = () => {
           <img src={revolutCards} alt="Cartões Revolut" className="w-full rounded-2xl" />
         </div>
         <div className="mt-8">
-          <Button onClick={() => setDialogOpen(true)} className="rounded-full font-semibold px-8 py-6 text-base">
+          <Button onClick={() => setDialogOpen(true)} className="rounded-full font-semibold px-8 py-6 text-base pulse">
             Solicitar o meu cartão
           </Button>
         </div>
