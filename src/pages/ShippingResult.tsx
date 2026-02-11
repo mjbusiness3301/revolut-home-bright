@@ -91,7 +91,7 @@ const ShippingResult = () => {
         <style>{`
           @keyframes progress-fill {
             from { width: 0%; }
-            to { width: 100%; }
+            to { width: 50%; }
           }
         `}</style>
 
