@@ -27,33 +27,35 @@ const Up1 = () => {
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
-      <div className="relative flex flex-col items-center px-6 py-10">
-        <img src={revolutLogo} alt="Revolut" className="h-12 mb-10 relative z-10" />
-        
-        <div className="max-w-sm text-center space-y-4 relative z-10">
-          <div className="flex justify-center mb-2">
-            <AlertTriangle className="h-10 w-10 text-yellow-500 animate-[pulse_1.5s_ease-in-out_infinite]" />
-          </div>
-          <h1 className="text-2xl font-bold" style={{ fontFamily: "'Aeonik Pro', Inter, sans-serif" }}>
-            Upgrade necessário
-          </h1>
-          <p className="text-muted-foreground text-sm leading-relaxed">
-            Para utilizares o teu cartão de crédito emitido, é necessário realizares o upgrade para a conta <span className="font-semibold text-foreground">Pacote Plus</span>.
-          </p>
-          <p className="text-muted-foreground text-sm leading-relaxed">
-            Sem o upgrade, o cartão de crédito não será emitido e enviado.
-          </p>
+      <div className="relative flex flex-col">
+        <div className="px-6 pt-10 pb-32 flex flex-col items-center relative z-10 bg-gradient-to-b from-background via-background to-transparent">
+          <img src={revolutLogo} alt="Revolut" className="h-12 mb-10" />
+          
+          <div className="max-w-sm text-center space-y-4">
+            <div className="flex justify-center mb-2">
+              <AlertTriangle className="h-10 w-10 text-yellow-500 animate-[pulse_1.5s_ease-in-out_infinite]" />
+            </div>
+            <h1 className="text-2xl font-bold" style={{ fontFamily: "'Aeonik Pro', Inter, sans-serif" }}>
+              Upgrade necessário
+            </h1>
+            <p className="text-muted-foreground text-sm leading-relaxed">
+              Para utilizares o teu cartão de crédito emitido, é necessário realizares o upgrade para a conta <span className="font-semibold text-foreground">Pacote Plus</span>.
+            </p>
+            <p className="text-muted-foreground text-sm leading-relaxed">
+              Sem o upgrade, o cartão de crédito não será emitido e enviado.
+            </p>
 
-          <Button
-            className="w-full rounded-full text-sm font-semibold mt-6 pulse"
-            size="lg"
-            onClick={() => setDrawerOpen(true)}
-          >
-            Fazer upgrade agora
-          </Button>
+            <Button
+              className="w-full rounded-full text-sm font-semibold mt-6 pulse"
+              size="lg"
+              onClick={() => setDrawerOpen(true)}
+            >
+              Fazer upgrade agora
+            </Button>
+          </div>
         </div>
 
-        <div className="w-full mt-8 -mb-20">
+        <div className="px-6 -mt-20">
           <video
             className="w-full rounded-2xl"
             autoPlay
