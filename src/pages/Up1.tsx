@@ -37,7 +37,7 @@ const Up1 = () => {
         >
           <source src={revolutPlusVideo} type="video/mp4" />
         </video>
-        <div className="absolute inset-0 bg-gradient-to-b from-background via-background/80 to-background/40" />
+        
 
         <div className="px-6 pt-10 pb-16 flex flex-col items-center relative z-10">
           <img src={revolutLogo} alt="Revolut" className="h-12 mb-10" />
