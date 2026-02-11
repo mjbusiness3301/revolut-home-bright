@@ -46,6 +46,7 @@ const CreditApproved = () => {
       </div>
 
       <div className="mt-10 px-2 space-y-3">
+        <p className="text-xs text-muted-foreground text-center mb-1">Arraste para selecionar o limite pretendido</p>
         <Slider
           min={MIN_LIMIT}
           max={MAX_LIMIT}
