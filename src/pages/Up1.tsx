@@ -29,7 +29,7 @@ const Up1 = () => {
     <div className="min-h-screen bg-background flex flex-col">
     <div className="relative flex flex-col min-h-screen">
         <video
-          className="absolute inset-0 w-full h-full object-cover top-32"
+          className="absolute inset-0 w-full h-full object-cover top-20"
           autoPlay
           muted
           playsInline
