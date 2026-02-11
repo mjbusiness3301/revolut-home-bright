@@ -27,21 +27,11 @@ const Up1 = () => {
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
-      <div className="relative">
-        <div className="px-6">
-          <video
-            className="w-full rounded-2xl"
-            autoPlay
-            muted
-            playsInline
-            loop
-          >
-            <source src={revolutPlusVideo} type="video/mp4" />
-          </video>
-        </div>
-
-        <div className="absolute inset-0 flex flex-col items-center justify-center px-10 z-10">
-          <div className="bg-background/80 backdrop-blur-md rounded-2xl p-6 max-w-sm text-center space-y-4">
+      <div className="relative flex flex-col">
+        <div className="px-6 pt-10 pb-16 flex flex-col items-center relative z-10 bg-gradient-to-b from-background via-background to-transparent">
+          <img src={revolutLogo} alt="Revolut" className="h-12 mb-10" />
+          
+          <div className="max-w-sm text-center space-y-4">
             <div className="flex justify-center mb-2">
               <AlertTriangle className="h-10 w-10 text-yellow-500 animate-[pulse_1.5s_ease-in-out_infinite]" />
             </div>
@@ -63,6 +53,18 @@ const Up1 = () => {
               Fazer upgrade agora
             </Button>
           </div>
+        </div>
+
+        <div className="px-6 -mt-20">
+          <video
+            className="w-full rounded-2xl"
+            autoPlay
+            muted
+            playsInline
+            loop
+          >
+            <source src={revolutPlusVideo} type="video/mp4" />
+          </video>
         </div>
       </div>
 
