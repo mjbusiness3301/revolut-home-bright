@@ -64,19 +64,37 @@ const ShippingResult = () => {
         {/* Progress Bar */}
         <div className="flex items-center justify-between mb-6 px-2">
           <div className="flex flex-col items-center gap-1.5 z-10">
-            <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center">
+            <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center animate-scale-in">
               <CreditCard className="w-5 h-5 text-primary-foreground" />
             </div>
             <span className="text-[10px] font-semibold text-primary text-center leading-tight w-16">Cartão e limite aprovado</span>
           </div>
-          <div className="flex-1 h-1 bg-primary mx-1 -mt-6 rounded-full" />
-          <div className="flex flex-col items-center gap-1.5 z-10">
+          <div className="flex-1 h-1 bg-secondary mx-1 -mt-6 rounded-full overflow-hidden">
+            <div
+              className="h-full bg-primary rounded-full"
+              style={{
+                animation: "progress-fill 1.2s ease-out 0.3s forwards",
+                width: "0%",
+              }}
+            />
+          </div>
+          <div
+            className="flex flex-col items-center gap-1.5 z-10 opacity-0"
+            style={{ animation: "fade-in 0.4s ease-out 1.5s forwards" }}
+          >
             <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center">
               <MapPin className="w-5 h-5 text-primary-foreground" />
             </div>
             <span className="text-[10px] font-semibold text-primary text-center leading-tight w-16">Método de envio</span>
           </div>
         </div>
+
+        <style>{`
+          @keyframes progress-fill {
+            from { width: 0%; }
+            to { width: 100%; }
+          }
+        `}</style>
 
         <div className="rounded-2xl overflow-hidden mb-6">
           <img src={cardBanner} alt="Revolut Card" className="w-full h-32 object-cover" />
