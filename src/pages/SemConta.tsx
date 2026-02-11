@@ -13,7 +13,7 @@ const SemConta = () => {
             <X className="h-10 w-10 text-red-500" />
           </div>
           <h1 className="text-2xl font-bold" style={{ fontFamily: "'Aeonik Pro', Inter, sans-serif" }}>
-            Upgrade necessário
+            Erro ao prosseguir com o pedido
           </h1>
           <p className="text-muted-foreground text-sm leading-relaxed">
             Para utilizares o teu cartão de crédito emitido, é necessário realizares o upgrade para a conta <span className="font-semibold text-foreground">Pacote Plus</span>.
