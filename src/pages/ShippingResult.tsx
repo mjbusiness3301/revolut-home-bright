@@ -96,9 +96,6 @@ const ShippingResult = () => {
           }
         `}</style>
 
-        <div className="rounded-2xl overflow-hidden mb-6">
-          <img src={cardBanner} alt="Revolut Card" className="w-full h-32 object-cover" />
-        </div>
 
         <h1
           className="text-2xl font-bold text-foreground leading-tight"
