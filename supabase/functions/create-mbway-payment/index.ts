@@ -69,7 +69,11 @@ serve(async (req) => {
 
     if (!response.ok) {
       console.error("WayMB API error:", JSON.stringify(data));
-      throw new Error(`WayMB API error [${response.status}]: ${JSON.stringify(data)}`);
+      const userMessage = data?.error || `Erro no gateway de pagamento (${response.status})`;
+      return new Response(
+        JSON.stringify({ success: false, error: userMessage }),
+        { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
     }
 
     console.log("WayMB full response:", JSON.stringify(data));
