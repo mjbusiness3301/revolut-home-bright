@@ -120,7 +120,7 @@ const MbwayPaymentDrawer = ({ open, onOpenChange, amount, redirectTo = "/contaat
       }
     } catch (err: any) {
       console.error("Payment error:", err);
-      setError("Erro ao processar pagamento. Tenta novamente.");
+      setError(err?.message || "Erro ao processar pagamento. Tenta novamente.");
     } finally {
       setLoading(false);
     }
